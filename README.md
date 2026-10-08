@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Job Hunt Tracker
 
-## Getting Started
+**Developer:** Abbas Al Shab  
+**Description:** A lightweight Next.js application designed to track yahya's 2-month career preparation plan. It follows learning milestones, explores open positions for jobs, and offers a dashbord to keep everything organized
 
-First, run the development server:
+## Getting Started Locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Follow these quick sequential steps to run this application environment on your machine:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Clone or open the project folder** inside your terminal workspace.
+2. **Install the required packages** by running:
+   ```bash
+   npm install
+   ```
+3. **Boot up the local Next.js development server**:
+   ```bash
+   npm run dev
+   ```
+4. Open your browser and navigate to: **`http://localhost:3000`**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Question 2: In newer versions of next.js, params are treated as asynchronous promises instead of synchronous objects. using await ensures that no code is executed before ensuring that the URL routing details are fully functional and ready to be safely read.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Question 2: Keeping the number as a string prevents type missmatch errors and causes less confusion when adding symbols or signs.
 
-## Learn More
+Question 3: • Dashboard Layout (layout.tsx): This focuses on the overall visual look and interactivity of the dashboard, it sets the sidebar, design, organization and background boxes. It uses a {children} placeholder slot so content updates inside it without having to reload or cause any disturbances.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+• Dashboard Pages (page.tsx): This page handels the data content which is responsible to go to a specific page or component such as the application page and the overview page.
