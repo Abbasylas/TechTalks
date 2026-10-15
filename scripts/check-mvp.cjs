@@ -60,6 +60,8 @@ const path = require('node:path');
     assert.equal(await page.getByTestId('percentage').innerText(), '100%');
     await page.keyboard.press('Tab');
     assert.equal(await page.locator(':focus').innerText(), 'Skip to training plan');
+    await page.keyboard.press('Enter');
+    assert.equal(new URL(page.url()).hash, '#training-plan');
     await page.keyboard.press('Tab');
     assert.equal(await page.locator(':focus').getAttribute('id'), 'sword-control');
     const focus = await page.locator(':focus').evaluate(el => ({ width: getComputedStyle(el).outlineWidth, style: getComputedStyle(el).outlineStyle }));
@@ -70,9 +72,46 @@ const path = require('node:path');
     assert.equal(await page.locator(':focus').getAttribute('id'), 'sword-control');
     await page.keyboard.press('Tab');
     assert.equal(await page.locator(':focus').getAttribute('id'), 'physical-endurance');
+    await page.keyboard.press('Space');
+    assert.equal(await page.getByTestId('percentage').innerText(), '33%');
+    assert.equal(await page.locator(':focus').getAttribute('id'), 'physical-endurance');
     await page.keyboard.press('Tab');
     assert.equal(await page.locator(':focus').getAttribute('id'), 'team-coordination');
-    record('Keyboard and focus', 'Tab reaches skip link and all three checkboxes in task order. Space undoes completion; 3px focus outline remains.');
+    await page.keyboard.press('Space');
+    assert.equal(await page.getByTestId('percentage').innerText(), '0%');
+    await page.keyboard.press('Space');
+    assert.equal(await page.getByTestId('percentage').innerText(), '33%');
+    await page.keyboard.press('Shift+Tab');
+    assert.equal(await page.locator(':focus').getAttribute('id'), 'physical-endurance');
+    await page.keyboard.press('Space');
+    assert.equal(await page.getByTestId('percentage').innerText(), '67%');
+    await page.keyboard.press('Shift+Tab');
+    assert.equal(await page.locator(':focus').getAttribute('id'), 'sword-control');
+    await page.keyboard.press('Space');
+    assert.equal(await page.getByTestId('percentage').innerText(), '100%');
+    // Reach both disclosures through normal Tab navigation, without focus() or a mouse.
+    for (const id of ['physical-endurance', 'team-coordination']) {
+      await page.keyboard.press('Tab');
+      assert.equal(await page.locator(':focus').getAttribute('id'), id);
+    }
+    for (const title of ['Why prepare?', 'Asta’s training focus']) {
+      await page.keyboard.press('Tab');
+      assert.equal(await page.locator(':focus').innerText(), title);
+      assert.equal(await page.locator(':focus').evaluate(el => getComputedStyle(el).outlineWidth), '3px');
+      await page.keyboard.press('Enter');
+      assert.equal(await page.locator(':focus').evaluate(el => el.parentElement.open), true);
+      await page.keyboard.press('Space');
+      assert.equal(await page.locator(':focus').evaluate(el => el.parentElement.open), false);
+    }
+    // Reverse through both notes and all task controls to prove focus is not trapped.
+    for (const target of ['Why prepare?', 'team-coordination', 'physical-endurance', 'sword-control']) {
+      await page.keyboard.press('Shift+Tab');
+      const focused = page.locator(':focus');
+      assert.equal(await focused.getAttribute('id') ?? await focused.innerText(), target);
+    }
+    await page.keyboard.press('Space');
+    assert.equal(await page.getByTestId('percentage').innerText(), '67%');
+    record('Keyboard and focus', 'Keyboard-only: skip-link activation, Tab/Shift+Tab through all 5 controls without trapping, Space completes/undoes every task, Enter/Space toggle both notes, 3px focus outlines.');
     await page.getByRole('checkbox', { name: 'Sword control', exact: true }).focus();
     await page.screenshot({ path: path.join(output, 'mvp-keyboard-focus.png'), fullPage: true });
     await boxes.nth(1).uncheck();

@@ -78,3 +78,22 @@ New evidence is stored separately from the earlier MVP screenshots: [desktop](ev
 ## Evidence cleanup
 
 The canonical documentation now lives in this repository's `docs/` directory. The duplicate workspace-level documentation was removed. Six selected screenshots and their index remain in `docs/evidence/`; raw JSON test outputs and intermediate screenshots are retained only in earlier Git history. The recorded test results above describe runs that occurred before cleanup, not new test runs. Browser check scripts remain available to reproduce those results.
+
+## Checklist recheck: keyboard operation (16 October 2026)
+
+Rechecked the current dashboard against the supplied MVP checklist in Chromium. All 14 UI check groups passed, including an expanded keyboard-only traversal; the 42 state assertions passed on the completed rerun. The credential-signature scan found no matches or environment files, and lint passed. One earlier state run timed out during undo; the repeat passed and no reproducible application failure was identified. No application-code fix was needed during this check.
+
+Keyboard checks used real browser key events, without a mouse or programmatic focus for the traversal:
+
+- Tab reaches the visible skip link; Enter activates it and the next Tab reaches Sword control.
+- Tab proceeds through Sword control, Physical endurance, Team coordination, and both character-note disclosures.
+- Space completes and undoes every task; the summary updates and focus stays on the control.
+- Shift+Tab traverses the same controls backwards without trapping focus.
+- Enter opens each character note and Space closes it.
+- Task inputs and note summaries expose a visible 3px gold focus outline.
+
+For a manual check, focus the webpage, press Tab, then use Tab / Shift+Tab to move and Space to toggle task checkboxes. Enter and Space operate the character notes. Native checkboxes use Space rather than Enter.
+
+The zero-progress criterion applies to a browser with no saved data. Returning users retain their saved completion after refresh, as required by the updated PRD. Content, descriptions/priorities, calculated progress bounds, responsive layout, real controls and agreed scope also passed the current checks. Actual screen-reader speech, other browsers and physical devices remain unverified.
+
+Temporary results stayed under ignored output/playwright/; no raw JSON or additional screenshots were added to the curated evidence folder.
