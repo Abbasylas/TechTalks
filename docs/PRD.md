@@ -61,12 +61,12 @@ Each task has equal weight. The total is always 3. Descriptions and priorities a
 - Completing Team coordination next updates the summary to 3 / 3 completed and 100%.
 - Undoing Sword control at that point returns its status to Incomplete and updates the summary to 2 / 3 completed and 67%.
 - Any task can be toggled in any order. Toggling does not navigate away or reload the page.
-- Persistence is not required. A refresh may reset every task to incomplete; users must not be promised saved progress.
+- Completion is saved in browser localStorage and restored after refresh. New browsers start incomplete. If storage is blocked or invalid, the dashboard remains usable and shows a saving warning.
 
 ## Acceptance criteria
 
 - [ ] One dashboard screen displays the product name and exactly the three predefined tasks, in the order shown above.
-- [ ] On initial load, all tasks are incomplete and the summary shows 0 / 3 completed and 0%.
+- [ ] With no saved data, all tasks are incomplete and the summary shows 0 / 3 completed and 0%.
 - [ ] Each task has an independently operable completion control and visible Complete or Incomplete status text.
 - [ ] Completing any one task updates its status, the count to 1 / 3 completed, and the percentage to 33% immediately.
 - [ ] Completing any two tasks shows 2 / 3 completed and 67%; completing all three shows 3 / 3 completed and 100%.
@@ -77,7 +77,7 @@ Each task has equal weight. The total is always 3. Descriptions and priorities a
 - [ ] At a viewport width of 320 CSS pixels, text and controls remain readable and usable without horizontal page scrolling.
 - [ ] Status is understandable without relying on colour, and controls expose their task names and checked states to assistive technology.
 - [ ] Progress updates are announced politely to screen-reader users without moving keyboard focus.
-- [ ] Refreshing does not break the dashboard. Retaining prior completion is not a requirement.
+- [ ] Refresh restores completed and undone tasks and recalculates the count and percentage. Blocked or malformed storage does not crash the dashboard.
 - [ ] The implementation uses Next.js, TypeScript, and Tailwind CSS, with no extra routes or excluded features.
 
 ## Design and accessibility requirements
@@ -92,14 +92,14 @@ Each task has equal weight. The total is always 3. Descriptions and priorities a
 - Provide a polite live announcement of the updated count and percentage.
 - Meet WCAG AA contrast targets: at least 4.5:1 for normal text, 3:1 for large text, and 3:1 for essential control boundaries and state indicators.
 - Communicate completion through text and control state as well as colour. If completed task names are struck through, keep them readable.
-- Include a brief note that progress may reset on refresh. No animation is required.
+- Show “Progress is saved in this browser.” when saving works, and a clear warning when browser saving is unavailable. No animation is required.
 
 ## Stack
 
 - **Next.js:** Serve the single dashboard screen.
 - **TypeScript:** Define task data and completion state clearly.
 - **Tailwind CSS:** Style the dashboard and its responsive layout.
-- **Local in-memory UI state:** Track completion during the current page session. No backend or storage service is required.
+- **Browser state and localStorage:** Keep task state in React and persist completed task IDs locally. No backend, database, or storage service is required.
 
 ## Assumptions
 
@@ -111,7 +111,7 @@ Each task has equal weight. The total is always 3. Descriptions and priorities a
 
 ## Limitations
 
-- Progress may be lost on refresh or when the page is closed.
+- Saved progress is specific to the browser and site address. Clearing site data, private browsing, or blocked browser storage can remove or prevent saved progress.
 - Progress is not shared between devices, browsers, or users.
 - The dashboard measures only how many predefined tasks are marked complete; it does not measure training quality, time spent, or combat readiness.
 - Users cannot customise the task list in this version.
@@ -119,7 +119,7 @@ Each task has equal weight. The total is always 3. Descriptions and priorities a
 ## Explicitly excluded features
 
 - Login, accounts, user profiles, and authentication.
-- Databases, saved progress, browser storage, and device synchronisation.
+- Databases, cloud storage, and device synchronisation. Browser localStorage is included by user request on 16 October 2026.
 - Payments, subscriptions, or purchases.
 - Chatbots, AI coaching, and generated training plans.
 - Combat simulation or predictions about defeating Lucifero.
@@ -129,3 +129,4 @@ Each task has equal weight. The total is always 3. Descriptions and priorities a
 - Training notes, attachments, search, filters, and task categories.
 - Team collaboration, sharing, leaderboards, and social features.
 - Historical reports, streaks, achievements, and analytics dashboards.
+

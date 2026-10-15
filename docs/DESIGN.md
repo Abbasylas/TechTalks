@@ -108,3 +108,7 @@ Reserve uppercase text for short section labels. Keep descriptions in sentence c
 - [ ] Check keyboard operation, screen-reader announcements, and the 320px layout in a working prototype.
 
 Both the original and updated screenshots are preserved in evidence/. The updated capture includes desktop and mobile previews at reduced scale; full-size captures and passing test results remain pending.
+
+## Browser saving update (16 October 2026)
+
+The user added localStorage persistence. Replace the earlier refresh-reset footer with “Progress is saved in this browser.” Show “Loading saved progress…” while restoring state, and disable completion controls until restoration finishes. When saving is unavailable, show “Browser saving is unavailable. Progress may reset on refresh.” The layout and plain POC scope remain unchanged.

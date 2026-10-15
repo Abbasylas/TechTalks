@@ -58,3 +58,24 @@ For the saved automation, make the Playwright package available to Node (the rec
 
 The Git repository is `asta/`, on branch `assignment-2-asta-mvp`. Before this experiment, that branch contained only the inherited starter commit, `14a7aab`. The experiment is committed with the message **Test training progress proof of concept**. Documentation and evidence are copied into `asta/docs/` so they are preserved with the code; the workspace-level `docs/POC.md` retains the same report.
 
+
+## Follow-up: browser persistence (16 October 2026)
+
+The user requested refresh-safe progress without a database after the original POC commit. This supersedes the original reset-on-refresh behaviour documented above.
+
+Completed task IDs are now saved to localStorage under `asta-training-completion-v1`. Storage is read after hydration, with controls disabled until loading finishes; the initial empty state never overwrites saved progress. Count and percentage remain derived from the task states. New visitors start incomplete. Saving errors do not prevent toggling; the page displays a warning. Data belongs to this browser/site address and may be removed by clearing browser data or private browsing. There is no cross-device sync or live cross-tab synchronisation.
+
+### Actual follow-up results
+
+- All **41 state checks passed**, including the original completion/undo/repeated-toggle combinations.
+- Refresh after full completion restored 3 / 3 and 100%.
+- Refresh after undo restored 2 / 3 and 67%.
+- Keyboard completion/undo remained consistent with restored state.
+- Malformed saved JSON fell back without crashing; the next toggle repaired it and survived refresh.
+- Blocked reads/writes left tasks usable and displayed the saving warning.
+- No browser page errors; no horizontal overflow at 320px.
+- Lint and TypeScript checks passed.
+
+Evidence: [persisted state screenshot](evidence/poc-persisted.png) and [follow-up results](evidence/poc-persistence-results.json). Original screenshots and test results are preserved as historical evidence.
+
+Decision: **Continue** with browser persistence. No database or full design was added.
