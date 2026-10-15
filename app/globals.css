@@ -1,26 +1,17 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+body { margin: 0; background: white; color: #0f172a; font: 16px/1.5 Arial, Helvetica, sans-serif; }
+main { max-width: 512px; margin: 0 auto; padding: 32px 16px; }
+h1 { margin: 0; font-size: 24px; font-weight: 700; }
+h2, legend { font-weight: 600; }
+p { margin: 8px 0; }
+section { margin: 24px 0; padding: 16px; border: 1px solid #64748b; border-radius: 4px; }
+[role="status"] { font-size: 20px; }
+ul { list-style: none; margin: 8px 0 0; padding: 0; }
+li + li { margin-top: 8px; }
+label { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 12px; border: 1px solid #64748b; border-radius: 4px; cursor: pointer; }
+input { width: 20px; height: 20px; flex-shrink: 0; accent-color: #1d4ed8; }
+input:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 4px; }
+label span:first-of-type { flex: 1; }
+label span:last-of-type { font-size: 14px; }
+main > p:last-child { margin-top: 24px; color: #475569; font-size: 14px; }

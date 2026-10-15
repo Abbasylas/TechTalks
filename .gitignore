@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated browser artifacts (selected evidence is retained in docs/evidence)
+/output/playwright/
