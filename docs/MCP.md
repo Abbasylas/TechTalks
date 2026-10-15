@@ -49,3 +49,7 @@ Available Stitch tool metadata was inspected before calling the server. It expos
   - [Heading fonts and colour tokens](evidence/stitch-mcp-record-colour-tokens.png), source Screenshot (31).png: shows saved heading/label fonts and named colours.
 - These images document the saved results, not a live tool execution or native MCP call UI. VS Code is the viewer in these screenshots; it was not the host that made the recorded calls.
 - **Successful-call screenshot: pending.** Available tools cannot capture the native Codex call UI in this session. Capture an expanded successful Stitch call showing the tool name, request, and returned result, with credentials hidden, then save it under `docs/evidence/` and link it here. No call screenshot has been fabricated or replaced by a mockup.
+
+## MVP design-context retrieval (16 October 2026)
+
+Called `mcp__stitch__get_screen` again for the same refined desktop and mobile IDs recorded above. Both returned successful screen metadata and HTML/screenshot URLs. Their HTML exports were downloaded and inspected; this supersedes the earlier statement that no HTML contents had been inspected. No new design generation or write tool was used. Exports are temporary inspection files under ignored `output/playwright/`; the app uses local code, local supplied artwork, and self-hosted fonts rather than Stitch CDN scripts or remote image replacements. The selected pair follows the latest supplied mockup; live canvas selection is still not exposed by the server.

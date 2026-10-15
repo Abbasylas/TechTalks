@@ -89,3 +89,7 @@ Verified the npm development script starts and serves the dashboard, the npm pro
 Evidence: [Webpack development results](evidence/webpack-dev-results.json) and [Webpack production results](evidence/webpack-production-results.json). These checks cover the current POC; repeat the standard build and interaction checks when the MVP is complete.
 
 The earlier `npm run dev -- --webpack` workaround is no longer necessary: use `npm run dev` directly from `asta/`.
+
+## MVP reuse (16 October 2026)
+
+The POC interaction now powers the implemented dashboard in `components/training-plan.tsx`; its original commit remains visible. It retains browser persistence, the same storage key, independent toggles, and derived count/percentage. The fixed task labels, descriptions and priorities are supplied from `lib/training-tasks.ts` by the static page. One additional check confirms duplicate/unknown stored IDs cannot inflate progress, bringing the state suite to 42 passing assertions. Both development and production passed. See [REVIEW.md](REVIEW.md) for the actual MVP acceptance results and remaining verification limits.

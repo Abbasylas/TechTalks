@@ -61,6 +61,11 @@ const path = require('node:path');
     await page.keyboard.press('Space');
     await verify('Keyboard Space undoes completion', 2);
     await page.screenshot({ path: path.join(evidence, 'poc-persisted.png'), fullPage: true });
+    await page.evaluate(() => localStorage.setItem('asta-training-completion-v1', JSON.stringify([
+      'sword-control', 'sword-control', 'physical-endurance', 'team-coordination', 'unknown-task',
+    ])));
+    await page.reload({ waitUntil: 'networkidle' });
+    await verify('Duplicate and unknown saved IDs cannot inflate progress', 3);
     await page.evaluate(() => localStorage.setItem('asta-training-completion-v1', '{broken'));
     await page.reload({ waitUntil: 'networkidle' });
     await verify('Malformed saved data falls back safely', 0);
@@ -75,7 +80,7 @@ const path = require('node:path');
     await verify('Unavailable storage falls back safely', 0);
     await boxes.nth(0).check();
     await verify('Tasks remain usable when storage is blocked', 1);
-    assert.match(await page.locator('main > p:last-child').innerText(), /saving is unavailable/);
+    assert.match(await page.getByTestId('saving-status').innerText(), /saving is unavailable/);
     await page.setViewportSize({ width: 320, height: 720 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
     await page.screenshot({ path: path.join(evidence, 'poc-mobile.png'), fullPage: true });

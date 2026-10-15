@@ -1,6 +1,6 @@
 # Design
 
-Status: Initial review and updated Stitch mockup recorded on 15 October 2026. Visual revisions are documented below; implementation and functional verification remain pending.
+Status: MVP implemented on 16 October 2026. Historical reviews are retained below; current implementation and verification are recorded in the final section and REVIEW.md.
 
 Use [PRD.md](PRD.md) as the source of product requirements.
 
@@ -112,3 +112,15 @@ Both the original and updated screenshots are preserved in evidence/. The update
 ## Browser saving update (16 October 2026)
 
 The user added localStorage persistence. Replace the earlier refresh-reset footer with “Progress is saved in this browser.” Show “Loading saved progress…” while restoring state, and disable completion controls until restoration finishes. When saving is unavailable, show “Browser saving is unavailable. Progress may reset on refresh.” The layout and plain POC scope remain unchanged.
+
+## Implemented MVP (16 October 2026)
+
+The refined Stitch desktop and mobile screens were retrieved through `mcp__stitch__get_screen`, and their HTML exports were downloaded and inspected. The implementation follows their single-column header → progress → task cards layout, dark panels, crimson and gold accents, Asta portrait, smaller Lucifero portrait, and visible background. The local earlier Barlow Condensed/Inter suggestion is superseded by the selected Stitch fonts: Space Grotesk and Plus Jakarta Sans, served locally with their licenses so builds do not fetch fonts.
+
+The supplied images are used exactly: images (2).jpg → background, images (3).jpg → Asta portrait, images (4).jpg → Lucifero portrait. Copied JPG file hashes match the originals. The background uses a 55% dark overlay plus a subtle vertical gradient; opaque text panels protect readability. No replacement AI artwork is used.
+
+The implementation retains the reviewed 1040px content width, 12px panel radius, 16px task descriptions, 14px badges/statuses, and 44px activation targets. It uses the reviewed crimson #F05264 and gold #D8B46A. Task section headings and saving text also have dark surfaces so they remain readable over the artwork. A brief goal/threat introduction and visible preparation-plan explanation satisfy the final acceptance checklist. No decorative action buttons were introduced.
+
+The original POC is preserved in Git history. Static page/header and local assets remain outside the small stateful Client Component. Refresh now preserves completion as requested; earlier reset-footer examples are historical.
+
+Production screenshots: [desktop](evidence/mvp-1440.png), [360px](evidence/mvp-360.png), [320px](evidence/mvp-320.png), and [focus](evidence/mvp-keyboard-focus.png). Layouts were visually inspected; measured contrast and functional results are in [REVIEW.md](REVIEW.md). Actual screen-reader speech and other browsers remain unverified.

@@ -1,90 +1,41 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
-const storageKey = "asta-training-completion-v1";
-
-const initialTasks = [
-  { id: "sword-control", label: "Sword control", complete: false },
-  { id: "physical-endurance", label: "Physical endurance", complete: false },
-  { id: "team-coordination", label: "Team coordination", complete: false },
-];
+import Image from "next/image";
+import TrainingPlan from "@/components/training-plan";
+import { trainingTasks } from "@/lib/training-tasks";
 
 export default function Home() {
-  const [tasks, setTasks] = useState(initialTasks);
-  const [loaded, setLoaded] = useState(false);
-  const [storageAvailable, setStorageAvailable] = useState(true);
-
-  useEffect(() => {
-    // Read browser storage after hydration; never overwrite it with initial state.
-    /* eslint-disable react-hooks/set-state-in-effect -- Restore external browser state after server hydration. */
-    try {
-      const saved: unknown = JSON.parse(localStorage.getItem(storageKey) ?? "[]");
-      if (Array.isArray(saved)) {
-        setTasks(initialTasks.map((task) => ({
-          ...task,
-          complete: saved.includes(task.id),
-        })));
-      }
-    } catch {
-      setStorageAvailable(false);
-    }
-    setLoaded(true);
-    /* eslint-enable react-hooks/set-state-in-effect */
-  }, []);
-  const completed = tasks.filter((task) => task.complete).length;
-  const percentage = Math.round((completed / tasks.length) * 100);
-
-  function toggleTask(id: string) {
-    const next = tasks.map((task) =>
-      task.id === id ? { ...task, complete: !task.complete } : task,
-    );
-    setTasks(next);
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(
-        next.filter((task) => task.complete).map((task) => task.id),
-      ));
-      setStorageAvailable(true);
-    } catch {
-      setStorageAvailable(false);
-    }
-  }
-
   return (
-    <main>
-      <h1>Training progress POC</h1>
-      <p>A small experiment for Asta’s preparation.</p>
-      <section aria-labelledby="progress-heading">
-        <h2 id="progress-heading">Preparation progress</h2>
-        <p role="status" aria-live="polite" aria-atomic="true">
-          <span data-testid="count">{completed} / {tasks.length}</span> completed ·{" "}
-          <span data-testid="percentage">{percentage}%</span>
-        </p>
-      </section>
-      <fieldset>
-        <legend>Training tasks</legend>
-        <ul>
-          {tasks.map((task) => (
-            <li key={task.id}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={task.complete}
-                  disabled={!loaded}
-                  onChange={() => toggleTask(task.id)}
-                  aria-label={task.label}
-                />
-                <span>{task.label}</span>
-                <span>{task.complete ? "Complete" : "Incomplete"}</span>
-              </label>
-            </li>
-          ))}
-        </ul>
-      </fieldset>
-      <p role="status">{!loaded ? "Loading saved progress…" : storageAvailable
-        ? "Progress is saved in this browser."
-        : "Browser saving is unavailable. Progress may reset on refresh."}</p>
-    </main>
+    <>
+      <div className="fixed inset-0 -z-10 bg-background" aria-hidden="true">
+        <Image src="/images/black-bulls-background.jpg" alt="" fill priority sizes="100vw" className="object-cover object-center" />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-linear-to-b from-background/20 via-transparent to-background/70" />
+      </div>
+      <a href="#training-plan" className="skip-link">Skip to training plan</a>
+      <main className="mx-auto w-full max-w-[1104px] px-4 py-6 sm:px-8 sm:py-12">
+        <header className="dashboard-panel mb-7 p-5 sm:mb-8 sm:p-7">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center gap-4 sm:gap-5">
+              <div className="relative size-16 shrink-0 overflow-hidden rounded-full border-2 border-gold sm:size-20">
+                <Image src="/images/asta.jpg" alt="Asta" fill sizes="80px" priority className="object-cover object-[42%_25%]" />
+              </div>
+              <div className="min-w-0">
+                <p className="eyebrow mb-2 text-gold">Black Bulls · Training plan</p>
+                <h1 className="font-display text-[30px] font-bold leading-[1.12] tracking-tight sm:text-[40px]">Asta’s Preparation Dashboard</h1>
+              </div>
+            </div>
+            <div className="flex shrink-0 items-center gap-3 border-t border-panel-border pt-4 lg:max-w-[180px] lg:border-t-0 lg:border-l lg:pt-0 lg:pl-5">
+              <Image src="/images/lucifero.jpg" alt="Lucifero" width={44} height={52} className="h-[52px] w-11 rounded-md border border-panel-border object-cover object-[50%_28%]" />
+              <p className="text-sm leading-relaxed text-muted">Preparing for<br /><span className="font-display text-base font-semibold text-crimson">Lucifero</span></p>
+            </div>
+          </div>
+          <p className="mt-5 max-w-[65ch] border-t border-panel-border pt-5 text-base leading-relaxed text-muted">
+            Lucifero is the threat ahead. Keep your training focused and your team ready for the confrontation.
+          </p>
+        </header>
+        <div id="training-plan" className="scroll-mt-6">
+          <TrainingPlan tasks={trainingTasks} />
+        </div>
+      </main>
+    </>
   );
 }
-

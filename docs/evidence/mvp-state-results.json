@@ -1,0 +1,262 @@
+{
+  "environment": "Local Next.js production server, headless Chromium",
+  "checks": [
+    {
+      "action": "Start with no tasks complete",
+      "count": "0 / 3",
+      "percentage": "0%",
+      "result": "PASS"
+    },
+    {
+      "action": "Complete one task",
+      "count": "1 / 3",
+      "percentage": "33%",
+      "result": "PASS"
+    },
+    {
+      "action": "Complete a second task",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Complete all tasks",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Undo one completed task",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 1",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 2",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 3",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 4",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 5",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 6",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 7",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 8",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 9",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 10",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 11",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 12",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 13",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 14",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 15",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 16",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 17",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 18",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 19",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Repeated toggle 20",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Combination 000",
+      "count": "0 / 3",
+      "percentage": "0%",
+      "result": "PASS"
+    },
+    {
+      "action": "Combination 001",
+      "count": "1 / 3",
+      "percentage": "33%",
+      "result": "PASS"
+    },
+    {
+      "action": "Combination 010",
+      "count": "1 / 3",
+      "percentage": "33%",
+      "result": "PASS"
+    },
+    {
+      "action": "Combination 011",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Combination 100",
+      "count": "1 / 3",
+      "percentage": "33%",
+      "result": "PASS"
+    },
+    {
+      "action": "Combination 101",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Combination 110",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Combination 111",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Refresh preserves all completed tasks",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Refresh preserves undone completion",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Keyboard Space completes a task",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Keyboard Space undoes completion",
+      "count": "2 / 3",
+      "percentage": "67%",
+      "result": "PASS"
+    },
+    {
+      "action": "Duplicate and unknown saved IDs cannot inflate progress",
+      "count": "3 / 3",
+      "percentage": "100%",
+      "result": "PASS"
+    },
+    {
+      "action": "Malformed saved data falls back safely",
+      "count": "0 / 3",
+      "percentage": "0%",
+      "result": "PASS"
+    },
+    {
+      "action": "A new toggle repairs malformed saved data",
+      "count": "1 / 3",
+      "percentage": "33%",
+      "result": "PASS"
+    },
+    {
+      "action": "Unavailable storage falls back safely",
+      "count": "0 / 3",
+      "percentage": "0%",
+      "result": "PASS"
+    },
+    {
+      "action": "Tasks remain usable when storage is blocked",
+      "count": "1 / 3",
+      "percentage": "33%",
+      "result": "PASS"
+    }
+  ],
+  "repeatedToggles": 20,
+  "allCombinationsChecked": 8,
+  "mobileWidth": 320,
+  "horizontalOverflow": false,
+  "pageErrors": []
+}

@@ -1,17 +1,47 @@
 @import "tailwindcss";
 
-body { margin: 0; background: white; color: #0f172a; font: 16px/1.5 Arial, Helvetica, sans-serif; }
-main { max-width: 512px; margin: 0 auto; padding: 32px 16px; }
-h1 { margin: 0; font-size: 24px; font-weight: 700; }
-h2, legend { font-weight: 600; }
-p { margin: 8px 0; }
-section { margin: 24px 0; padding: 16px; border: 1px solid #64748b; border-radius: 4px; }
-[role="status"] { font-size: 20px; }
-ul { list-style: none; margin: 8px 0 0; padding: 0; }
-li + li { margin-top: 8px; }
-label { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 12px; border: 1px solid #64748b; border-radius: 4px; cursor: pointer; }
-input { width: 20px; height: 20px; flex-shrink: 0; accent-color: #1d4ed8; }
-input:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 4px; }
-label span:first-of-type { flex: 1; }
-label span:last-of-type { font-size: 14px; }
-main > p:last-child { margin-top: 24px; color: #475569; font-size: 14px; }
+@theme inline {
+  --color-background: #0b0b10;
+  --color-surface: #11141a;
+  --color-foreground: #f5f2ed;
+  --color-muted: #b8b5c2;
+  --color-crimson: #f05264;
+  --color-gold: #d8b46a;
+  --color-panel-border: #383844;
+  --color-track: #383844;
+  --font-display: var(--font-space-grotesk), Arial, sans-serif;
+  --font-sans: var(--font-plus-jakarta), Arial, sans-serif;
+}
+
+:root { color-scheme: dark; }
+body { background: #0b0b10; color: #f5f2ed; font-family: var(--font-plus-jakarta), Arial, sans-serif; }
+::selection { background: #ff9b9b; color: #11141a; }
+
+@layer components {
+  .dashboard-panel {
+    @apply rounded-xl border border-panel-border bg-surface shadow-lg;
+  }
+  .eyebrow { @apply text-xs font-semibold tracking-[0.12em] uppercase; }
+  .priority-badge { @apply rounded border border-current/35 bg-white/5 px-2 py-1 text-sm leading-none; }
+  .checkbox-target { @apply flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-lg; }
+  .task-checkbox {
+    appearance: none;
+    @apply grid size-6 cursor-pointer place-items-center rounded border-2 border-[#93909e] bg-surface;
+  }
+  .task-checkbox:checked { @apply border-crimson bg-crimson; }
+  .task-checkbox:checked::after {
+    content: "";
+    width: 11px;
+    height: 7px;
+    border-left: 2px solid #11141a;
+    border-bottom: 2px solid #11141a;
+    transform: translateY(-1px) rotate(-45deg);
+  }
+  .task-checkbox:focus-visible { outline: 3px solid #d8b46a; outline-offset: 5px; }
+  .checkbox-target:has(:focus-visible) { @apply bg-white/10; }
+  .task-checkbox:disabled { @apply cursor-wait opacity-60; }
+  .task-card:hover { border-color: #777481; }
+  .task-card[data-complete="true"] { border-color: #8a7447; }
+  .status-mark { @apply inline-flex size-4 items-center justify-center; }
+  .skip-link { @apply fixed top-3 left-3 z-50 -translate-y-24 rounded bg-gold p-3 font-semibold text-surface focus:translate-y-0; }
+}
