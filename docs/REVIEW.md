@@ -97,3 +97,15 @@ For a manual check, focus the webpage, press Tab, then use Tab / Shift+Tab to mo
 The zero-progress criterion applies to a browser with no saved data. Returning users retain their saved completion after refresh, as required by the updated PRD. Content, descriptions/priorities, calculated progress bounds, responsive layout, real controls and agreed scope also passed the current checks. Actual screen-reader speech, other browsers and physical devices remain unverified.
 
 Temporary results stayed under ignored output/playwright/; no raw JSON or additional screenshots were added to the curated evidence folder.
+
+## Small pilot — fictional example
+
+This is an illustrative scenario, not a test that actually took place. The actions and quotes below are invented; replace them with real observations after asking a classmate or friend to try the dashboard.
+
+In this scenario, I ask my classmate Maya to try the dashboard on my laptop without explaining where anything is. She spots the training tasks below the progress bar and reads the three names. She chooses Sword control, clicks its checkbox, and notices the percentage change from 0% to 33%. “Okay, that was easy. Can I uncheck it if I clicked the wrong one?” She clicks it again, sees the progress return to zero, then marks it complete once more.
+
+When I ask what 33% means, she initially says, “He’s a third ready to fight?” After reading the explanation under the bar, she corrects herself: “Oh, it’s because I finished one of the three tasks. It doesn’t mean he’s strong enough yet.” Finding and completing a task felt straightforward; interpreting the percentage needed a second look. She noticed the large number before the smaller explanation.
+
+**One improvement I would make:** put “1 of 3 training tasks complete” directly beside the percentage. The current explanation can stay, but the number would make sense without needing to look elsewhere. This is a proposed improvement; it has not been implemented or tested with a real participant.
+
+A real pilot could help identify usability issues. This fictional example provides no user-research evidence, and even a small real pilot would not establish market demand.
