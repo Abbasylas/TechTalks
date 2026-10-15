@@ -66,3 +66,11 @@ Opaque panels keep text independent of the background artwork. Measured ratios: 
 ## Not verified
 
 Actual spoken screen-reader announcements, physical mobile devices, Firefox/Safari/Edge, every operating-system rendering, exhaustive credential formats or full Git history, and pixel-perfect equivalence to every Stitch detail were not verified. No user research or product validation is claimed. Storage remains local to this browser/site address; no cross-device or live cross-tab sync is included.
+
+## Character layout follow-up (16 October 2026)
+
+Implemented the newly requested Lucifero/Asta character sidebar with descriptions and two native disclosures. Task state and persistence code were not changed. Both disclosures open and close with Enter and have a visible focus outline. Automated layout checks place the sidebar left of the plan at 1440px and after the plan at 360px. No horizontal overflow was found at 320px, 360px or desktop width. The restored background loads at 1672 × 941 with no CSS blur, and all five image placements load successfully.
+
+`npm run lint` and `npm run build` passed. The 42 state checks passed against production, and 14 UI check groups passed against development and production, with no page errors, console errors or failed HTTP responses in successful runs. The UI runner now waits for saved-state loading before making its refresh assertion.
+
+New evidence is stored separately from the earlier MVP screenshots: [desktop](evidence/characters-desktop.png), [mobile](evidence/characters-mobile.png), [development checks](evidence/characters-dev-results.json), and [production checks](evidence/characters-production-results.json). The restored image is an AI derivative; exact source detail preservation is not claimed. Previous screen-reader, browser and physical-device verification limitations still apply.

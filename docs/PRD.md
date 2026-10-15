@@ -130,3 +130,9 @@ Each task has equal weight. The total is always 3. Descriptions and priorities a
 - Team collaboration, sharing, leaderboards, and social features.
 - Historical reports, streaks, achievements, and analytics dashboards.
 
+
+## User-authorized character context update (16 October 2026)
+
+Supporting context now includes Lucifero and Asta portrait cards, short descriptions, and expandable fixed character notes. Display these beside the plan on desktop and after the plan on mobile. The three core training features and fixed tasks remain unchanged. This user request supersedes earlier layout recommendations to keep Lucifero only as a small header portrait. It does not add combat measurements or simulation.
+
+The background may use a clearly documented AI-restored derivative of the supplied source to improve clarity; preserve the original source file.

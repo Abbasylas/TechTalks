@@ -1,17 +1,18 @@
 import Image from "next/image";
 import TrainingPlan from "@/components/training-plan";
+import CharacterBriefs from "@/components/character-briefs";
 import { trainingTasks } from "@/lib/training-tasks";
 
 export default function Home() {
   return (
     <>
       <div className="fixed inset-0 -z-10 bg-background" aria-hidden="true">
-        <Image src="/images/black-bulls-background.jpg" alt="" fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src="/images/black-bulls-background-restored.png" alt="" fill priority unoptimized sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 bg-linear-to-b from-background/20 via-transparent to-background/70" />
       </div>
       <a href="#training-plan" className="skip-link">Skip to training plan</a>
-      <main className="mx-auto w-full max-w-[1104px] px-4 py-6 sm:px-8 sm:py-12">
+      <main className="mx-auto w-full max-w-[1264px] px-4 py-6 sm:px-8 sm:py-12">
         <header className="dashboard-panel mb-7 p-5 sm:mb-8 sm:p-7">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-4 sm:gap-5">
@@ -32,8 +33,11 @@ export default function Home() {
             Lucifero is the threat ahead. Keep your training focused and your team ready for the confrontation.
           </p>
         </header>
-        <div id="training-plan" className="scroll-mt-6">
-          <TrainingPlan tasks={trainingTasks} />
+        <div className="grid items-start gap-6 lg:grid-cols-[288px_minmax(0,1fr)] lg:gap-7">
+          <div id="training-plan" className="min-w-0 scroll-mt-6 lg:col-start-2 lg:row-start-1">
+            <TrainingPlan tasks={trainingTasks} />
+          </div>
+          <CharacterBriefs />
         </div>
       </main>
     </>

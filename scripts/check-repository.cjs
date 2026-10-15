@@ -36,7 +36,7 @@ assert.equal(scripts.dev, 'next dev --webpack');
 assert.equal(scripts.build, 'next build --webpack');
 const report = {
   credentialScan: { textFilesScanned: textFiles.length, potentialSecretMatches: 0, environmentFiles: 0, limitations: 'Signature-based worktree scan plus source inspection; not a guarantee against every credential format or past Git history.' },
-  scope: { applicationRoutes: ['/'], clientComponents: ['components/training-plan.tsx'], database: false, auth: false, extraActions: false },
+  scope: { applicationRoutes: ['/'], clientComponents: ['components/training-plan.tsx'], database: false, auth: false, supportingCharacterDisclosures: 2 },
   scripts,
 };
 const output = path.join(root, 'output/playwright');

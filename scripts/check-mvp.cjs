@@ -56,6 +56,7 @@ const path = require('node:path');
     }
     record('Progress bar and bounds', 'All 8 combinations: count, percentage, fill width and accessible progress values agree, 0–100%.');
     await page.reload({ waitUntil: 'networkidle' });
+    await page.waitForFunction(() => !document.querySelector('input[type="checkbox"]').disabled);
     assert.equal(await page.getByTestId('percentage').innerText(), '100%');
     await page.keyboard.press('Tab');
     assert.equal(await page.locator(':focus').innerText(), 'Skip to training plan');
@@ -93,11 +94,37 @@ const path = require('node:path');
     }
     assert.equal(await page.locator('main button').count(), 0);
     assert.equal(await page.locator('main a').count(), 0);
-    record('No pretend actions', 'Only functional task inputs and a skip link; no decorative dashboard buttons or extra navigation.');
+    record('No pretend actions', 'Functional task inputs, character disclosures and skip link; no decorative dashboard buttons or extra navigation.');
+    const briefs = page.locator('.character-notes');
+    assert.equal(await briefs.count(), 2);
+    for (let i = 0; i < 2; i++) {
+      const summary = briefs.nth(i).locator('summary');
+      await summary.focus();
+      await page.keyboard.press('Enter');
+      assert.equal(await briefs.nth(i).getAttribute('open'), '');
+      assert.equal(await summary.evaluate(el => getComputedStyle(el).outlineWidth), '3px');
+      assert.ok(await briefs.nth(i).locator('p').isVisible());
+      await page.keyboard.press('Enter');
+      assert.equal(await briefs.nth(i).getAttribute('open'), null);
+    }
+    record('Character notes', 'Both original portrait cards have descriptions. Enter opens and closes each note with visible keyboard focus.');
+    for (const width of [1440, 360]) {
+      await page.setViewportSize({ width, height: 1000 });
+      const sidebar = await page.locator('aside').boundingBox();
+      const training = await page.locator('#training-plan').boundingBox();
+      if (width === 1440) assert.ok(sidebar.x < training.x);
+      else assert.ok(sidebar.y >= training.y + training.height);
+    }
+    record('Character layout', 'Character sidebar sits left of training on desktop and follows the training controls on mobile.');
     const images = await page.locator('img').evaluateAll(elements => elements.map(el => ({ src: el.getAttribute('src'), loaded: el.complete && el.naturalWidth > 0 })));
-    assert.equal(images.length, 3);
+    assert.equal(images.length, 5);
     assert.ok(images.every(image => image.loaded));
-    record('Original artwork', 'All three local images load: supplied background, Asta, and Lucifero.');
+    const background = page.locator('img').first();
+    const resolution = await background.evaluate(el => ({ width: el.naturalWidth, height: el.naturalHeight, filter: getComputedStyle(el).filter }));
+    assert.ok(resolution.width > 596 && resolution.height > 335);
+    assert.equal(resolution.filter, 'none');
+    assert.match(await background.getAttribute('src'), /background-restored\.png$/);
+    record('Restored background and original portraits', { background: resolution, imagesLoaded: images.length, note: 'AI-restored background; original portrait files retained and reused in the sidebar.' });
     const colours = await page.evaluate(() => {
       const colour = (selector, property) => getComputedStyle(document.querySelector(selector))[property];
       return {

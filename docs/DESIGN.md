@@ -124,3 +124,13 @@ The implementation retains the reviewed 1040px content width, 12px panel radius,
 The original POC is preserved in Git history. Static page/header and local assets remain outside the small stateful Client Component. Refresh now preserves completion as requested; earlier reset-footer examples are historical.
 
 Production screenshots: [desktop](evidence/mvp-1440.png), [360px](evidence/mvp-360.png), [320px](evidence/mvp-320.png), and [focus](evidence/mvp-keyboard-focus.png). Layouts were visually inspected; measured contrast and functional results are in [REVIEW.md](REVIEW.md). Actual screen-reader speech and other browsers remain unverified.
+
+## Character context and background restoration (16 October 2026)
+
+The user requested a visible Lucifero side card like Screenshot (32), plus Asta’s second supplied portrait and short character descriptions. This explicitly expands the earlier minimal layout with supporting character context. There are still exactly three training tasks and three core training features; no combat metrics, simulation, routes, accounts, editing, or database were added.
+
+Desktop now uses a 288px left character column and the preparation plan on the right. On mobile the character cards follow the training controls. Each original portrait has a visible description and a native keyboard-operable disclosure for additional context. These are real controls with visible focus, not decorative buttons. The existing stateful Client Component and localStorage task logic are unchanged.
+
+The original background was 596 × 335 and looked soft when enlarged. A non-destructive AI-assisted restoration produced a 1672 × 941 version at `public/images/black-bulls-background-restored.png`. It is served directly without additional optimizer recompression or a CSS blur filter. The original `black-bulls-background.jpg` is preserved. Restoration improves the appearance but can reconstruct or alter small line details; it is not a higher-resolution original from the artist. Both portrait files remain the supplied originals.
+
+Evidence: [new reference](evidence/character-sidebar-reference.png), [desktop](evidence/characters-desktop.png), [mobile](evidence/characters-mobile.png), and [production checks](evidence/characters-production-results.json).

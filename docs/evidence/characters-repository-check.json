@@ -1,0 +1,25 @@
+{
+  "credentialScan": {
+    "textFilesScanned": 36,
+    "potentialSecretMatches": 0,
+    "environmentFiles": 0,
+    "limitations": "Signature-based worktree scan plus source inspection; not a guarantee against every credential format or past Git history."
+  },
+  "scope": {
+    "applicationRoutes": [
+      "/"
+    ],
+    "clientComponents": [
+      "components/training-plan.tsx"
+    ],
+    "database": false,
+    "auth": false,
+    "supportingCharacterDisclosures": 2
+  },
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint"
+  }
+}

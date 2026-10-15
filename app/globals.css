@@ -44,4 +44,7 @@ body { background: #0b0b10; color: #f5f2ed; font-family: var(--font-plus-jakarta
   .task-card[data-complete="true"] { border-color: #8a7447; }
   .status-mark { @apply inline-flex size-4 items-center justify-center; }
   .skip-link { @apply fixed top-3 left-3 z-50 -translate-y-24 rounded bg-gold p-3 font-semibold text-surface focus:translate-y-0; }
+  .character-notes summary { @apply min-h-11 cursor-pointer content-center rounded text-sm font-semibold; }
+  .character-notes summary:focus-visible { outline: 3px solid #d8b46a; outline-offset: 4px; }
+  .character-notes[open] summary { @apply underline decoration-current/50 underline-offset-4; }
 }
