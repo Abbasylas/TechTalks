@@ -6,7 +6,7 @@ Use [PRD.md](PRD.md) as the source of product requirements.
 
 ## Review evidence and limits
 
-![Original Stitch design screenshot](evidence/stitch-design-before.png)
+Original Stitch design screenshot (historical evidence retained in Git history)
 
 The supplied screenshot shows desktop and mobile designs inside Stitch at 28% canvas zoom. Review concerns below refer to the dashboard previews, not the surrounding Stitch or browser controls. Fine text, exact font sizes, colour contrast, control dimensions, keyboard behaviour, and actual mobile overflow cannot be verified from this screenshot. Text in the Stitch conversation is not proof that accessibility or functionality passes.
 
@@ -123,7 +123,7 @@ The implementation retains the reviewed 1040px content width, 12px panel radius,
 
 The original POC is preserved in Git history. Static page/header and local assets remain outside the small stateful Client Component. Refresh now preserves completion as requested; earlier reset-footer examples are historical.
 
-Production screenshots: [desktop](evidence/mvp-1440.png), [360px](evidence/mvp-360.png), [320px](evidence/mvp-320.png), and [focus](evidence/mvp-keyboard-focus.png). Layouts were visually inspected; measured contrast and functional results are in [REVIEW.md](REVIEW.md). Actual screen-reader speech and other browsers remain unverified.
+Production screenshots: desktop (historical evidence retained in Git history), 360px (historical evidence retained in Git history), 320px (historical evidence retained in Git history), and focus (historical evidence retained in Git history). Layouts were visually inspected; measured contrast and functional results are in [REVIEW.md](REVIEW.md). Actual screen-reader speech and other browsers remain unverified.
 
 ## Character context and background restoration (16 October 2026)
 
@@ -133,4 +133,4 @@ Desktop now uses a 288px left character column and the preparation plan on the r
 
 The original background was 596 × 335 and looked soft when enlarged. A non-destructive AI-assisted restoration produced a 1672 × 941 version at `public/images/black-bulls-background-restored.png`. It is served directly without additional optimizer recompression or a CSS blur filter. The original `black-bulls-background.jpg` is preserved. Restoration improves the appearance but can reconstruct or alter small line details; it is not a higher-resolution original from the artist. Both portrait files remain the supplied originals.
 
-Evidence: [new reference](evidence/character-sidebar-reference.png), [desktop](evidence/characters-desktop.png), [mobile](evidence/characters-mobile.png), and [production checks](evidence/characters-production-results.json).
+Evidence: [new reference](evidence/character-sidebar-reference.png), [desktop](evidence/characters-desktop.png), [mobile](evidence/characters-mobile.png), and production checks (historical evidence retained in Git history).

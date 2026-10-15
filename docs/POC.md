@@ -49,10 +49,10 @@ For the saved automation, make the Playwright package available to Node (the rec
 
 ## Evidence and Git history
 
-- [Initial state screenshot](evidence/poc-initial.png).
+- Initial state screenshot (historical evidence retained in Git history).
 - [After undo screenshot](evidence/poc-after-undo.png): two checked tasks, 2 / 3 completed, 67%.
-- [320px screenshot](evidence/poc-mobile.png).
-- [Actual browser results](evidence/poc-results.json).
+- 320px screenshot (historical evidence retained in Git history).
+- Actual browser results (historical evidence retained in Git history).
 
 ![POC after undoing Sword control](evidence/poc-after-undo.png)
 
@@ -76,7 +76,7 @@ Completed task IDs are now saved to localStorage under `asta-training-completion
 - No browser page errors; no horizontal overflow at 320px.
 - Lint and TypeScript checks passed.
 
-Evidence: [persisted state screenshot](evidence/poc-persisted.png) and [follow-up results](evidence/poc-persistence-results.json). Original screenshots and test results are preserved as historical evidence.
+Evidence: persisted state screenshot (historical evidence retained in Git history) and follow-up results (historical evidence retained in Git history). Original screenshots and test results are preserved as historical evidence.
 
 Decision: **Continue** with browser persistence. No database or full design was added.
 
@@ -86,7 +86,7 @@ Turbopack is optional. The package scripts now select Webpack for both `npm run 
 
 Verified the npm development script starts and serves the dashboard, the npm production build exits successfully, and `npm run start` serves the built application. The 41 state checks passed against both development and production, including persistence, undo, repeated toggles, malformed storage, and blocked storage. Lint passed with no warnings. No browser page errors were recorded in either successful test run.
 
-Evidence: [Webpack development results](evidence/webpack-dev-results.json) and [Webpack production results](evidence/webpack-production-results.json). These checks cover the current POC; repeat the standard build and interaction checks when the MVP is complete.
+Evidence: Webpack development results (historical evidence retained in Git history) and Webpack production results (historical evidence retained in Git history). These checks cover the current POC; repeat the standard build and interaction checks when the MVP is complete.
 
 The earlier `npm run dev -- --webpack` workaround is no longer necessary: use `npm run dev` directly from `asta/`.
 

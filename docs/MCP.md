@@ -41,12 +41,12 @@ Available Stitch tool metadata was inspected before calling the server. It expos
 
 ## Evidence
 
-- [Sanitized actual call record](evidence/stitch-mcp-call-record.json): requests and returned context, with credentials, authentication headers, asset download URLs, and other projects’ details omitted.
+- Sanitized actual call record (historical evidence retained in Git history): requests and returned context, with credentials, authentication headers, asset download URLs, and other projects’ details omitted.
 - [Latest supplied mockup](evidence/stitch-design-updated.png): visual reference only, not evidence of an MCP call.
 - User-supplied screenshots of the sanitized saved call record in VS Code (no credentials are visible):
   - [Project-list request and result](evidence/stitch-mcp-record-project-list.png), source Screenshot (29).png: shows the actual recorded tool name, empty input, five returned projects, and matched Asta project.
-  - [Project metadata and theme](evidence/stitch-mcp-record-project-theme.png), source Screenshot (30).png: shows project identity, dark mode, body font, and custom colour.
-  - [Heading fonts and colour tokens](evidence/stitch-mcp-record-colour-tokens.png), source Screenshot (31).png: shows saved heading/label fonts and named colours.
+  - Project metadata and theme (historical evidence retained in Git history), source Screenshot (30).png: shows project identity, dark mode, body font, and custom colour.
+  - Heading fonts and colour tokens (historical evidence retained in Git history), source Screenshot (31).png: shows saved heading/label fonts and named colours.
 - These images document the saved results, not a live tool execution or native MCP call UI. VS Code is the viewer in these screenshots; it was not the host that made the recorded calls.
 - **Successful-call screenshot: pending.** Available tools cannot capture the native Codex call UI in this session. Capture an expanded successful Stitch call showing the tool name, request, and returned result, with credentials hidden, then save it under `docs/evidence/` and link it here. No call screenshot has been fabricated or replaced by a mockup.
 

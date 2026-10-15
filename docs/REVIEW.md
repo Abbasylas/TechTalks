@@ -54,14 +54,14 @@ Opaque panels keep text independent of the background artwork. Measured ratios: 
 
 ## Evidence
 
-- [Desktop, production](evidence/mvp-1440.png).
-- [360px mobile, production](evidence/mvp-360.png).
-- [320px mobile, production](evidence/mvp-320.png).
-- [Keyboard focus, production](evidence/mvp-keyboard-focus.png).
-- [Production MVP checks](evidence/mvp-production-results.json).
-- [Development MVP checks](evidence/mvp-dev-results.json).
-- [42 state assertions, production](evidence/mvp-state-results.json).
-- [Repository check](evidence/mvp-repository-check.json).
+- Desktop, production (historical evidence retained in Git history).
+- 360px mobile, production (historical evidence retained in Git history).
+- 320px mobile, production (historical evidence retained in Git history).
+- Keyboard focus, production (historical evidence retained in Git history).
+- Production MVP checks (historical evidence retained in Git history).
+- Development MVP checks (historical evidence retained in Git history).
+- 42 state assertions, production (historical evidence retained in Git history).
+- Repository check (historical evidence retained in Git history).
 
 ## Not verified
 
@@ -73,4 +73,8 @@ Implemented the newly requested Lucifero/Asta character sidebar with description
 
 `npm run lint` and `npm run build` passed. The 42 state checks passed against production, and 14 UI check groups passed against development and production, with no page errors, console errors or failed HTTP responses in successful runs. The UI runner now waits for saved-state loading before making its refresh assertion.
 
-New evidence is stored separately from the earlier MVP screenshots: [desktop](evidence/characters-desktop.png), [mobile](evidence/characters-mobile.png), [development checks](evidence/characters-dev-results.json), and [production checks](evidence/characters-production-results.json). The restored image is an AI derivative; exact source detail preservation is not claimed. Previous screen-reader, browser and physical-device verification limitations still apply.
+New evidence is stored separately from the earlier MVP screenshots: [desktop](evidence/characters-desktop.png), [mobile](evidence/characters-mobile.png), development checks (historical evidence retained in Git history), and production checks (historical evidence retained in Git history). The restored image is an AI derivative; exact source detail preservation is not claimed. Previous screen-reader, browser and physical-device verification limitations still apply.
+
+## Evidence cleanup
+
+The canonical documentation now lives in this repository's `docs/` directory. The duplicate workspace-level documentation was removed. Six selected screenshots and their index remain in `docs/evidence/`; raw JSON test outputs and intermediate screenshots are retained only in earlier Git history. The recorded test results above describe runs that occurred before cleanup, not new test runs. Browser check scripts remain available to reproduce those results.
