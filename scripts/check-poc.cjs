@@ -14,7 +14,7 @@ const path = require('node:path');
   page.on('pageerror', (error) => errors.push(error.message));
   const results = [];
   try {
-    await page.goto('http://127.0.0.1:3000', { waitUntil: 'networkidle' });
+    await page.goto(process.env.POC_BASE_URL ?? 'http://127.0.0.1:3000', { waitUntil: 'networkidle' });
     const boxes = page.getByRole('checkbox');
     assert.equal(await boxes.count(), 3);
     await page.getByRole('checkbox', { name: 'Sword control', exact: true }).focus();

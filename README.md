@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Asta’s Preparation Dashboard — POC
 
-## Getting Started
+A small Next.js experiment with three training tasks, completion toggles, calculated progress, and browser-local saving. The full fantasy dashboard design is not implemented yet.
 
-First, run the development server:
+## Run locally
 
-```bash
+From this directory:
+
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Both `npm run dev` and `npm run build` explicitly use Webpack. No Turbopack flags or CSS loader are required. Tailwind CSS uses the standard `@tailwindcss/postcss` integration.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm run build
+npm run start
+```
 
-## Learn More
+## Checks and documentation
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+npm run lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+See [POC results](docs/POC.md), [requirements](docs/PRD.md), and [design](docs/DESIGN.md). Completion is saved in localStorage for this browser and site address; no database is used.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The browser checker is `scripts/check-poc.cjs`. It requires Playwright to be available to Node (the documented runs use the bundled runtime via NODE_PATH). Set POC_BASE_URL to test a different server, for example http://127.0.0.1:3001 for production.

@@ -79,3 +79,13 @@ Completed task IDs are now saved to localStorage under `asta-training-completion
 Evidence: [persisted state screenshot](evidence/poc-persisted.png) and [follow-up results](evidence/poc-persistence-results.json). Original screenshots and test results are preserved as historical evidence.
 
 Decision: **Continue** with browser persistence. No database or full design was added.
+
+## Standard commands without Turbopack (16 October 2026)
+
+Turbopack is optional. The package scripts now select Webpack for both `npm run dev` and `npm run build`. Removed the Turbopack CSS rules and `@tailwindcss/turbopack` dependency; configured Tailwind through `@tailwindcss/postcss` and updated the npm lockfile. The development origin configuration accepts both localhost and 127.0.0.1.
+
+Verified the npm development script starts and serves the dashboard, the npm production build exits successfully, and `npm run start` serves the built application. The 41 state checks passed against both development and production, including persistence, undo, repeated toggles, malformed storage, and blocked storage. Lint passed with no warnings. No browser page errors were recorded in either successful test run.
+
+Evidence: [Webpack development results](evidence/webpack-dev-results.json) and [Webpack production results](evidence/webpack-production-results.json). These checks cover the current POC; repeat the standard build and interaction checks when the MVP is complete.
+
+The earlier `npm run dev -- --webpack` workaround is no longer necessary: use `npm run dev` directly from `asta/`.
