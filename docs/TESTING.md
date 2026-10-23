@@ -1,50 +1,134 @@
 # Testing
 
-This demo uses Next.js 16.3.6 and React 19.2.8.
 
-## Check the preview
+The main checks passed. The profile loaded, the preview showed its loading message, and the client handled success, errors, empty results, and retries. The page also worked at 360px wide.
 
-1. Reload the dashboard directly in the browser.
-2. The page title, introduction, and explorer should appear while recent posts load.
-3. The preview shows its loading message for at least two seconds, then up to three titles. Network time can make it take longer.
-4. The profile has a separate request and loading message. It can finish before or after the preview.
-5. Click **Load posts**. This makes a separate browser request without the artificial delay.
 
-The two-second pause is an intentional learning simulation kept in `components/recent-posts.tsx`. `await connection()` runs before it so this work waits for a real request instead of finishing during prerendering. The existing fetch caching settings are unchanged. Navigation and prefetching can affect what you see, so test with a direct reload.
+
+## Results
+
+**Server profile**
+
+- Expected: Showing full employee details.
+- Actual: Leanne Graham, Sincere@april.biz, and Romaguera-Crona from `/users/1`.
+- Result: Pass.
+
+**Server preview**
+
+- Expected: A loading message while the rest of the page stays visible.
+- Actual: The shell arrived at 127 ms. Three titles arrived at 2,130 ms.
+- Result: Pass.
+
+**Client idle**
+
+- Expected: No fetch before clicking.
+- Actual: The code test counted zero requests before clicking, even after changing the selector.
+- Result: Pass in the code test. Browser request counting was not tested.
+
+**Client slow**
+
+- Expected: Loading feedback and no duplicate requests.
+- Actual: The controls were disabled, then 10 posts appeared. Two rapid clicks made one request in the code test.
+- Result: Pass.
+
+**Client success**
+
+- Expected: Post titles and bodies.
+- Actual: Saw 10 English fan notes after the real API request.
+- Result: Pass.
+
+**HTTP failure**
+
+- Expected: Catch the custom error and offer Retry.
+- Actual: The local 503 showed an error and Retry. The code test confirmed `ApiError` with status 503.
+- Result: Pass.
+
+**Empty response**
+
+- Expected: “No posts found” without an error.
+- Actual: Saw that message after the local empty response. No error appeared.
+- Result: Pass.
+
+**Recovery**
+
+- Expected: Retry successfully after an error.
+- Actual: Switched from HTTP error to Success and clicked Retry. Posts appeared and the error cleared.
+- Result: Pass.
+
+**Section independence**
+
+- Expected: The server sections stay when the client fails.
+- Actual: The profile and three preview titles stayed visible during the client error.
+- Result: Pass.
+
+**Usability**
+
+- Expected: Labels, visible keyboard focus, and a readable page at 360px.
+- Actual: Labels and focus were visible. Text wrapped without sideways scrolling.
+- Result: Pass.
+
+Request counts used a fake fetch in a code test. The visible states were checked in the running browser. The English fan notes replace the API’s placeholder Latin.
+
+## Commands
+
+**npm run lint**
+
+- Expected: No lint errors.
+- Actual: Passed on the host with exit code 0. npm was unavailable in the sandbox.
+- Result: Pass.
+
+**npm run build**
+
+- Expected: Build without errors.
+- Actual: Finished with exit code 0 using Turbopack.
+- Result: Pass.
+
+Both commands were run for this report.
+
+## Screenshots and steps
+
+These are screenshots of the running app. Timing was measured separately: the preview through a fresh HTTP response, and Slow mode through the code test. Slow waited 2,006 ms before fetching. A screenshot alone cannot prove timing.
+
+### Normal
+
+Reloaded `/` and waited for the profile and three preview titles. Left the client explorer idle.
+
+![Normal dashboard](screenshots/normal.jpg)
+
+### Server-preview loading
+
+Reloaded `/` and captured the loading message. The rest of the page stayed visible. The two-second pause is an intentional learning simulation.
+
+![Server preview loading](screenshots/server-preview-loading.jpg)
+
+### Client error
+
+Selected HTTP error and clicked Load posts. The 503 was created locally. The server sections stayed visible.
+
+![Client HTTP error](screenshots/client-error.jpg)
+
+### Empty
+
+Selected Empty and clicked the action button. The empty response was created locally, not returned by JSONPlaceholder.
+
+![Empty client result](screenshots/empty.jpg)
+
+### Mobile keyboard focus
+
+At 360px, Shift+Tab focused Load posts. Tab then moved to Demo scenario. Both had a visible focus outline.
+
+![Mobile keyboard focus](screenshots/mobile-focus.jpg)
+
+## Not tested
+
+- Counting requests in the browser’s Network panel.
+- A real API outage or a real 503 from JSONPlaceholder.
+- Screen-reader output and other browsers.
 
 ## Why a manual boundary?
 
-The manual Suspense boundary replaces only the preview while its child waits. The async work happens inside that child, not at the top of the page.
+`loading.tsx` shows a loading screen while a page loads. A shared header can stay visible above it.
 
-A `loading.tsx` file shows a loading screen while a page loads. A shared layout, such as the site header, can stay visible above it.
+Here, a manual Suspense boundary shows loading only in the preview. `await connection()` makes the demo wait for a real request. I used direct reloads because navigation and prefetching can change what appears.
 
-Here, only the posts preview needs to wait. A manual Suspense boundary lets us show a loading message just there. Both options are useful; the choice depends on how much of the page should show a loading message.
-
-A request started by a client click handler uses React loading state. Suspense does not track that handler's fetch.
-
-## Failure checks
-
-- If the profile fails, its friendly message should appear without replacing the title or posts.
-- If the preview fails, only the preview should show an error.
-- If the explorer fails, **Retry** should allow another request.
-- Try an HTTP 404 or 503 response. The affected section should show its HTTP status.
-- Try a rejected network request. It should show a connection message without an invented HTTP status.
-- A successful `[]` response should show **No posts found**, not an error.
-- After success or failure, the client button should be enabled again.
-
-## Check the client request
-
-1. Open the browser’s Network panel, select Fetch/XHR, and filter by `jsonplaceholder.typicode.com`.
-2. Reload the page. No direct API request should appear there yet. The profile and preview requests run on the server, so their API calls are not listed in the browser’s Network panel.
-3. Click **Load posts**. One GET request to `https://jsonplaceholder.typicode.com/posts?userId=1` should appear. Open its Initiator details to trace it back to the client click handler.
-4. Use network throttling to see the loading message and disabled button. Repeated clicks must not start another request while it is running.
-5. A successful response shows titles and bodies. The journal uses original English fan notes for display because the API text is placeholder Latin.
-6. Select **Empty** and click **Load posts** to check **No posts found**, with no error message or browser API request.
-7. Select **HTTP error** and load. Only the explorer should show HTTP 503. This is a local response, so there should be no browser API request.
-8. Switch to **Success**. The current error should stay until you click **Retry**. The real request should then recover without changing the server sections.
-9. Select **Slow** and load. Loading should begin immediately, but the real API request should start about two seconds later.
-10. Changing the selector alone should never fetch. It should keep the current result and its last-attempt label.
-
-## Code checks
-
-Run `npm run lint` and `npx tsc --noEmit`. Repeat the preview checks with a production build too. Setup and run commands are in the [README](../README.md).
+Neither option is always better. A click request uses its own React loading state; Suspense does not watch the click handler’s fetch.
