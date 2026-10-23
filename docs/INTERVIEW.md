@@ -1,8 +1,18 @@
 # Interview
 
+## Initial predictions
+
+These are a short summary of what I expected before building:
+
+- The profile would run on the server because I thought the data was private.
+- I described the preview as client-side but also called it an async Server Component. I was mixing the two up.
+- The button’s click handler would run in the browser.
+- Local storage and a loading message would stay visible while data loaded.
+- Suspense would only work during the first render, and fetch would throw for an HTTP error.
+
 ## Looking back at my predictions
 
-- I got the request locations right: server for the profile and preview, browser for the button request.
+- I put the profile and button requests in the right places. The preview request runs on the server; the browser displays its result.
 - My reason about privacy was wrong. This API data is public, and the profile is visible in the browser.
 - Local storage is not used here. The page shell stays visible while each section loads.
 - Suspense is not limited to the first render. It handles work that suspends during rendering, but it does not automatically watch a click handler’s fetch.

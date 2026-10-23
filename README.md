@@ -1,6 +1,8 @@
 # Vinland Saga Fan Journal
 
-A small Next.js dashboard with English fan notes about Vinland Saga. It uses Next.js 16.3.6, React 19.2.8, and TypeScript.
+Full name: Abbas Al Shab
+
+An Employee Explorer dashboard at `/`, themed around Vinland Saga. It uses Next.js 16.3.6, React 19.2.8, and TypeScript.
 
 The demo profile and post records come from JSONPlaceholder for employee 1. Original English fan notes replace the API’s placeholder post text.
 
@@ -60,3 +62,11 @@ The client explorer’s **Demo scenario** selector applies to the next **Load po
 These are deliberate learning simulations. JSONPlaceholder does not return the local 503 or empty response. Every response uses the same HTTP check and JSON parser. Only Success and Slow make an API request.
 
 To check recovery, select **HTTP error**, click **Load posts**, then select **Success** and click **Retry**. The last-attempt label shows which scenario produced the visible result.
+
+## Limitations
+
+- Real profile and posts requests need an internet connection and a working JSONPlaceholder API.
+- The English fan notes cover post IDs 1–10. Other post IDs show a generic note.
+- The contributor number in the profile is a fixed demo label.
+- The delays and local responses are kept for learning. They do not describe the API’s real speed or reliability.
+- Browser request counting, other browsers, and screen-reader output were not tested. The testing report explains what was checked.
