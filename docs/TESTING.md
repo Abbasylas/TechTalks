@@ -26,7 +26,11 @@ A request started by a client click handler uses React loading state. Suspense d
 
 - If the profile fails, its friendly message should appear without replacing the title or posts.
 - If the preview fails, only the preview should show an error.
-- If the explorer fails, **Try again** should allow another request.
+- If the explorer fails, **Retry** should allow another request.
+- Try an HTTP 404 or 503 response. The affected section should show its HTTP status.
+- Try a rejected network request. It should show a connection message without an invented HTTP status.
+- A successful `[]` response should show **No posts found**, not an error.
+- After success or failure, the client button should be enabled again.
 
 ## Check the client request
 
@@ -35,8 +39,11 @@ A request started by a client click handler uses React loading state. Suspense d
 3. Click **Load posts**. One GET request to `https://jsonplaceholder.typicode.com/posts?userId=1` should appear. Open its Initiator details to trace it back to the client click handler.
 4. Use network throttling to see the loading message and disabled button. Repeated clicks must not start another request while it is running.
 5. A successful response shows titles and bodies. The journal uses original English fan notes for display because the API text is placeholder Latin.
-6. Use a local response override with `[]` to check the exact message **No posts found**.
-7. After the profile and preview have loaded, block the posts URL and click **Load posts** again. Only the explorer should show an error. Unblock it and click **Try again** to check recovery.
+6. Select **Empty** and click **Load posts** to check **No posts found**, with no error message or browser API request.
+7. Select **HTTP error** and load. Only the explorer should show HTTP 503. This is a local response, so there should be no browser API request.
+8. Switch to **Success**. The current error should stay until you click **Retry**. The real request should then recover without changing the server sections.
+9. Select **Slow** and load. Loading should begin immediately, but the real API request should start about two seconds later.
+10. Changing the selector alone should never fetch. It should keep the current result and its last-attempt label.
 
 ## Code checks
 

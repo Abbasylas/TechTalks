@@ -45,3 +45,18 @@ See [TESTING.md](docs/TESTING.md) for the preview and failure checks.
 - **Load posts** fetches full posts in the browser after a click.
 
 Reload the page directly to see the preview’s loading message. Navigation and prefetching can change what you observe.
+
+## Demo scenarios
+
+The client explorer’s **Demo scenario** selector applies to the next **Load posts** or **Retry** click. Changing it does not fetch anything or affect the server profile or preview.
+
+| Scenario | What happens |
+| --- | --- |
+| Success | Makes the real JSONPlaceholder posts request. |
+| Slow | Waits two seconds, then makes the real request. |
+| HTTP error | Creates a local `Response` with status 503. |
+| Empty | Creates a local successful JSON `Response` containing `[]`. |
+
+These are deliberate learning simulations. JSONPlaceholder does not return the local 503 or empty response. Every response uses the same HTTP check and JSON parser. Only Success and Slow make an API request.
+
+To check recovery, select **HTTP error**, click **Load posts**, then select **Success** and click **Retry**. The last-attempt label shows which scenario produced the visible result.

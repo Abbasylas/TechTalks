@@ -18,11 +18,15 @@ export default async function EmployeeProfile() {
 
     // Parse the response body; a parsing failure also reaches the catch below.
     employee = (await response.json()) as Employee;
-  } catch {
+  } catch (error) {
+    // An HTTP failure has a status. A network failure may have no response at all.
+    const message = error instanceof ApiError
+      ? `We couldn’t load the contributor profile (HTTP ${error.status}). Please refresh the page to try again.`
+      : "We couldn’t load the contributor profile. Check your connection or refresh the page to try again.";
     // Only this section changes if the profile can't load.
     return (
       <p role="alert" className="error">
-        We couldn’t load the contributor profile. Please refresh the page to try again.
+        {message}
       </p>
     );
   }

@@ -18,7 +18,7 @@ export default async function RecentPosts() {
     // getPosts uses /posts?userId=1 and adds our English fan-note text.
     posts = await getPosts();
   } catch (error) {
-    // A failed preview stays inside this section.
+    // errorMessage separates HTTP errors from network failures, just for this section.
     return <p role="alert" className="error">{errorMessage(error, "recent posts")} Refresh the page to retry.</p>;
   }
   // An empty response is valid; it isn't a request failure.

@@ -35,6 +35,11 @@ async function fetchJson<T>(url: string): Promise<T> {
     // Don't leave a loading message on screen forever.
     signal: AbortSignal.timeout(15000),
   });
+  return parseJsonResponse<T>(response);
+}
+
+// Real requests and local demo responses use exactly the same checks.
+export async function parseJsonResponse<T>(response: Response): Promise<T> {
   // fetch doesn't throw for HTTP errors such as 404 or 500.
   if (!response.ok) throw new ApiError("The request failed.", response.status);
   // Read the JSON body. Invalid JSON rejects and reaches the caller's catch.
@@ -51,7 +56,13 @@ export async function getPosts() {
 
 // A caught value can be anything, so check its type before reading its status.
 export function errorMessage(error: unknown, subject: string) {
-  return error instanceof ApiError
-    ? `Could not load ${subject} (HTTP ${error.status}). Please try again.`
-    : `Could not load ${subject}. Check your connection and try again.`;
+  if (error instanceof ApiError) {
+    return `Could not load ${subject} (HTTP ${error.status}). Please try again.`;
+  }
+  // A rejected fetch can have no Response and no HTTP status.
+  if (error instanceof TypeError) {
+    return `Could not load ${subject}. Check your connection and try again.`;
+  }
+  // Timeouts, invalid JSON, and other failures still get a safe message.
+  return `Could not load ${subject}. Please try again.`;
 }
