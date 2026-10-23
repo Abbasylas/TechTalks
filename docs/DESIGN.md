@@ -1,12 +1,12 @@
 # Design
 
-Status: MVP implemented on 16 October 2026. Historical reviews are retained below; current implementation and verification are recorded in the final section and REVIEW.md.
+**Current status:** The MVP uses a character sidebar on desktop, character cards after the training plan on mobile, locally served Space Grotesk and Plus Jakarta Sans, and browser saving. See the final implementation sections and [REVIEW.md](REVIEW.md) for verification. Earlier layouts, fonts, refresh-reset text, and unchecked verification items below are historical recommendations.
 
 Use [PRD.md](PRD.md) as the source of product requirements.
 
-## Review evidence and limits
+## Historical design review — evidence and limits
 
-Original Stitch design screenshot (historical evidence retained in Git history)
+[Original Stitch design screenshot](https://github.com/Abbasylas/TechTalks/blob/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4/docs/evidence/stitch-design-before.png) (historical evidence).
 
 The supplied screenshot shows desktop and mobile designs inside Stitch at 28% canvas zoom. Review concerns below refer to the dashboard previews, not the surrounding Stitch or browser controls. Fine text, exact font sizes, colour contrast, control dimensions, keyboard behaviour, and actual mobile overflow cannot be verified from this screenshot. Text in the Stitch conversation is not proof that accessibility or functionality passes.
 
@@ -38,7 +38,7 @@ The following table records the initial review. Several layout corrections are v
 | Medium | The background artwork is difficult to identify in the screenshot. | Use images (2).jpg as the page background with a dark overlay starting around 80% opacity. Adjust only enough to reveal atmosphere while keeping panels and text clear. |
 | Medium | The antagonist portrait dominates the desktop artwork. | Use images (3).jpg as Asta’s header portrait and images (4).jpg as a smaller Lucifero portrait beside the subtitle. Preserve proportions and keep both secondary to the title. |
 
-## Target layout and content
+## Historical target layout and content
 
 1. **Header:** Asta portrait, “Asta’s Preparation Dashboard,” and “Preparing for Lucifero” with a smaller Lucifero portrait. Allow wrapping on mobile.
 2. **Preparation summary:** “Preparation progress,” initial value “0%,” count “0 / 3 completed,” and an empty horizontal progress bar. Use a 12px-high track.
@@ -51,7 +51,7 @@ The following table records the initial review. Several layout corrections are v
 | Physical endurance | Complete a focused strength and stamina session. | Medium | Incomplete |
 | Team coordination | Review a preparation plan with the Black Bulls. | High | Incomplete |
 
-## Colour and imagery specification
+## Historical colour and imagery specification
 
 | Role | Value | Use |
 | --- | --- | --- |
@@ -66,7 +66,7 @@ The following table records the initial review. Several layout corrections are v
 
 Use a small crimson edge accent consistently. Avoid large glows or additional accent colours. Do not use priority colour as the only label. Render background imagery with proportional cropping rather than stretching; avoid enlarging the small portrait sources into prominent panels.
 
-## Typography and spacing specification
+## Historical typography and spacing specification
 
 | Element | Target |
 | --- | --- |
@@ -99,7 +99,7 @@ Reserve uppercase text for short section labels. Keep descriptions in sentence c
 - Verify a readable 320px-wide layout without horizontal scrolling. Decorative images must not interrupt the accessible reading order.
 - No animation is required.
 
-## Follow-up verification
+## Historical follow-up checklist
 
 - [ ] Capture the revised desktop and mobile screens at readable scale in evidence/.
 - [ ] Confirm the agreed section order, exact task content, and removal of unrelated panels.
@@ -107,7 +107,7 @@ Reserve uppercase text for short section labels. Keep descriptions in sentence c
 - [ ] Test initial, partial, complete, and undone completion states.
 - [ ] Check keyboard operation, screen-reader announcements, and the 320px layout in a working prototype.
 
-Both the original and updated screenshots are preserved in evidence/. The updated capture includes desktop and mobile previews at reduced scale; full-size captures and passing test results remain pending.
+The original screenshot is preserved at the historical link above; the updated screenshot remains in `evidence/`. At this review stage, full-size captures and implementation checks were pending. Later implementation results are recorded below and in [REVIEW.md](REVIEW.md).
 
 ## Browser saving update (16 October 2026)
 

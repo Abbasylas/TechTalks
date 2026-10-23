@@ -1,6 +1,6 @@
 # Stitch MCP retrieval
 
-Status: Read-only calls succeeded and returned results. A screenshot of the successful call UI is still pending.
+**Current status:** Historical read-only Stitch calls and their saved results were inspected. The [existing request/result screenshot](evidence/stitch-mcp-record-project-list.png) is preserved. Stitch tools are not exposed in this session, so a new Stitch call could not be made or captured. An expanded successful call screenshot remains outstanding.
 
 ## Host, client, and server
 
@@ -8,9 +8,9 @@ Status: Read-only calls succeeded and returned results. A screenshot of the succ
 - **Client:** The MCP client within Codex sends structured tool requests and receives results.
 - **Server:** The connected Stitch MCP server exposes project, screen, and design-system operations and returns Stitch data. The dashboard itself does not require MCP integration.
 
-## Tool inspection
+## Historical tool inspection and calls
 
-Available Stitch tool metadata was inspected before calling the server. It exposes `list_projects`, `get_project`, `list_screens`, `get_screen`, and `list_design_systems`, plus creation, editing, and deletion tools. Full discovered names are recorded in the evidence file. No generic `get_design_context` or current-selection tool was exposed. No write operations were called.
+The original Stitch tool metadata was inspected before calling the server. It exposed `list_projects`, `get_project`, `list_screens`, `get_screen`, and `list_design_systems`, plus creation, editing, and deletion tools. Full discovered names are preserved in the [sanitized saved call record](https://github.com/Abbasylas/TechTalks/blob/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4/docs/evidence/stitch-mcp-call-record.json). No generic `get_design_context` or current-selection tool was exposed. No write operations were called during retrieval.
 
 ## Actual calls and returned results
 
@@ -32,24 +32,35 @@ Available Stitch tool metadata was inspected before calling the server. It expos
 - Guidelines describe checkboxes, focus rings, badges, cards, and progress bars. These do not prove implemented behaviour or accessible contrast.
 - Refined canvas instances are 1280 × 1024 desktop and 390 × 884 mobile. Screen detail dimensions are twice those sizes; the response does not explain the scaling.
 
-## Missing information and limits
+## Historical retrieval limits
 
 - Live canvas selection is not exposed. The refined pair was retrieved based on its titles and consistency with the latest supplied mockup; the exact selected-screen ID remains unconfirmed.
-- HTML and screenshot URLs were returned, but their contents were not downloaded or inspected. Exact per-screen styling and working interactions remain unverified.
-- The saved Stitch theme and local design recommendations need reconciliation before implementation. Generic design-system guidance does not expand the PRD scope.
-- Keyboard behaviour, screen-reader announcements, contrast, progress calculations, and the 320px layout still need testing in an implementation.
+- At the initial retrieval stage, HTML and screenshot URLs had been returned without inspecting their contents. The later MVP retrieval below included HTML inspection.
+- The theme was subsequently reconciled with the implementation as described in [DESIGN.md](DESIGN.md). Generic design-system guidance did not expand the PRD scope.
+- Implementation checks for keyboard operation, contrast, progress, and mobile layout are recorded in [REVIEW.md](REVIEW.md). Actual screen-reader speech remains untested.
 
 ## Evidence
 
-- Sanitized actual call record (historical evidence retained in Git history): requests and returned context, with credentials, authentication headers, asset download URLs, and other projects’ details omitted.
+- [Sanitized saved call record](https://github.com/Abbasylas/TechTalks/blob/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4/docs/evidence/stitch-mcp-call-record.json): requests and returned context, with credentials, authentication headers, asset download URLs, and other projects’ details omitted. It records summaries of returned data, rather than an unmodified server transcript.
 - [Latest supplied mockup](evidence/stitch-design-updated.png): visual reference only, not evidence of an MCP call.
 - User-supplied screenshots of the sanitized saved call record in VS Code (no credentials are visible):
   - [Project-list request and result](evidence/stitch-mcp-record-project-list.png), source Screenshot (29).png: shows the actual recorded tool name, empty input, five returned projects, and matched Asta project.
-  - Project metadata and theme (historical evidence retained in Git history), source Screenshot (30).png: shows project identity, dark mode, body font, and custom colour.
-  - Heading fonts and colour tokens (historical evidence retained in Git history), source Screenshot (31).png: shows saved heading/label fonts and named colours.
+  - [Project metadata and theme](https://github.com/Abbasylas/TechTalks/blob/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4/docs/evidence/stitch-mcp-record-project-theme.png), source Screenshot (30).png: shows project identity, dark mode, body font, and custom colour.
+  - [Heading fonts and colour tokens](https://github.com/Abbasylas/TechTalks/blob/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4/docs/evidence/stitch-mcp-record-colour-tokens.png), source Screenshot (31).png: shows saved heading/label fonts and named colours.
 - These images document the saved results, not a live tool execution or native MCP call UI. VS Code is the viewer in these screenshots; it was not the host that made the recorded calls.
-- **Successful-call screenshot: pending.** Available tools cannot capture the native Codex call UI in this session. Capture an expanded successful Stitch call showing the tool name, request, and returned result, with credentials hidden, then save it under `docs/evidence/` and link it here. No call screenshot has been fabricated or replaced by a mockup.
+
+## Screenshot still required
+
+The historical JSON and screenshot were checked against each other: both show `mcp__stitch__list_projects`, input `{}`, five returned projects, and the matched Asta project. The screenshot is a view of the saved record in VS Code. This session has neither a callable Stitch tool nor native Codex UI capture, so it cannot supply a new screenshot of an expanded successful Stitch call.
+
+When Stitch is available, run a read-only call and capture its expanded tool name, request, and successful returned result with credentials hidden. Save that screenshot in `docs/evidence/` and link it here. Existing evidence remains intact.
 
 ## MVP design-context retrieval (16 October 2026)
 
 Called `mcp__stitch__get_screen` again for the same refined desktop and mobile IDs recorded above. Both returned successful screen metadata and HTML/screenshot URLs. Their HTML exports were downloaded and inspected; this supersedes the earlier statement that no HTML contents had been inspected. No new design generation or write tool was used. Exports are temporary inspection files under ignored `output/playwright/`; the app uses local code, local supplied artwork, and self-hosted fonts rather than Stitch CDN scripts or remote image replacements. The selected pair follows the latest supplied mockup; live canvas selection is still not exposed by the server.
+
+## Direct GitHub history
+
+- [POC and original saved MCP evidence](https://github.com/Abbasylas/TechTalks/commit/0901dc329dd632c114d1499077ecea49909b111c).
+- [MVP implementation and updated retrieval account](https://github.com/Abbasylas/TechTalks/commit/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4).
+- [Evidence cleanup](https://github.com/Abbasylas/TechTalks/commit/a07de867d7e531df4e0035799da94d9fce731a2e), which removed redundant local records while preserving them in history.

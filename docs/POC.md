@@ -1,6 +1,10 @@
 # Training progress proof of concept
 
-Date: 16 October 2026. Decision: **Continue**.
+**Current status:** The POC led to the implemented MVP. Completion now persists in localStorage; the original reset-on-refresh behaviour below is historical. See [REVIEW.md](REVIEW.md) for current results and [README.md](../README.md) for current run commands.
+
+## Historical experiment — 16 October 2026
+
+Decision: **Continue**.
 
 ## Question
 
@@ -43,7 +47,7 @@ The rounding is intentional: one task is 33% and two tasks are 67%. Adding a fix
 
 ## Run and reproduce
 
-From `asta/`, run `npm run dev -- --webpack`, then open http://127.0.0.1:3000. Use the table above for a manual repeat.
+From the repository root (`asta/`), run `npm run dev`, then open http://127.0.0.1:3000. The script already selects Webpack. The table above records the original experiment; refresh now restores saved completion.
 
 For the saved automation, make the Playwright package available to Node (the recorded run used the bundled runtime via `NODE_PATH`) and run `node scripts/check-poc.cjs`. The runner writes screenshots and JSON results under `output/playwright/`. No test dependency was added to the application.
 
@@ -56,7 +60,7 @@ For the saved automation, make the Playwright package available to Node (the rec
 
 ![POC after undoing Sword control](evidence/poc-after-undo.png)
 
-The Git repository is `asta/`, on branch `assignment-2-asta-mvp`. Before this experiment, that branch contained only the inherited starter commit, `14a7aab`. The experiment is committed with the message **Test training progress proof of concept**. Documentation and evidence are copied into `asta/docs/` so they are preserved with the code; the workspace-level `docs/POC.md` retains the same report.
+The Git repository is `asta/`, on branch `assignment-2-asta-mvp`. The original experiment is preserved in [Test training progress proof of concept](https://github.com/Abbasylas/TechTalks/commit/0901dc329dd632c114d1499077ecea49909b111c); browser saving was added in [Preserve training progress in browser storage](https://github.com/Abbasylas/TechTalks/commit/0ab57097b306b0a6297c5ee2fa0454e203ba87cf). Canonical documentation is in this repository’s `docs/` directory.
 
 
 ## Follow-up: browser persistence (16 October 2026)

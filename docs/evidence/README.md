@@ -1,14 +1,14 @@
 # Selected evidence
 
-This folder keeps six useful screenshots. Test summaries remain in the documentation; repetitive raw JSON outputs and intermediate captures were removed.
+**Current status:** Six historical screenshots are preserved. The MCP image shows a saved call record; an expanded successful call screenshot is still outstanding. Current test results are recorded in [REVIEW.md](../REVIEW.md#final-assignment-verification).
 
 | File | Purpose |
 | --- | --- |
-| [characters-desktop.png](characters-desktop.png) | Latest production desktop dashboard. |
-| [characters-mobile.png](characters-mobile.png) | Latest production mobile dashboard. |
+| [characters-desktop.png](characters-desktop.png) | Production desktop dashboard from the character-sidebar implementation. |
+| [characters-mobile.png](characters-mobile.png) | Production mobile dashboard from the character-sidebar implementation. |
 | [stitch-design-updated.png](stitch-design-updated.png) | Reviewed Stitch layout before implementation. |
 | [character-sidebar-reference.png](character-sidebar-reference.png) | Reference for the requested character sidebar. |
 | [poc-after-undo.png](poc-after-undo.png) | Original POC showing 2 / 3 completed and 67%. |
 | [stitch-mcp-record-project-list.png](stitch-mcp-record-project-list.png) | Screenshot of the saved MCP call record, not the live call UI. |
 
-Earlier captures and raw records remain recoverable from Git history before this cleanup. Browser checks can regenerate temporary output under ignored `output/playwright/`; generated outputs should not be copied here unless they add useful evidence.
+Earlier captures and raw records are available in the [MVP evidence snapshot](https://github.com/Abbasylas/TechTalks/tree/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4/docs/evidence), including the [sanitized MCP record](https://github.com/Abbasylas/TechTalks/blob/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4/docs/evidence/stitch-mcp-call-record.json). See the [MVP commit](https://github.com/Abbasylas/TechTalks/commit/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4) and [cleanup commit](https://github.com/Abbasylas/TechTalks/commit/a07de867d7e531df4e0035799da94d9fce731a2e) for provenance. Browser checks regenerate temporary outputs under ignored `output/playwright/`.

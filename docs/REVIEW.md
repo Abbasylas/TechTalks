@@ -1,6 +1,14 @@
 # MVP review
 
-Reviewed: 16 October 2026. Status: implemented and verified within the limits below.
+**Current status:** The MVP is implemented. Muhammad successfully completed a training task and understood the progress percentages. Current checks are recorded under [final assignment verification](#final-assignment-verification); earlier results below are historical.
+
+## User testing — Muhammad
+
+My friend Muhammad visited the website, found a training task, and completed it successfully. He checked the progress percentages and understood how they worked. He encountered no errors or confusion.
+
+**Proposed improvement:** Add a short “Each task counts equally” note beside the progress summary to make the calculation clearer for new visitors.
+
+## Historical acceptance review — 16 October 2026
 
 ## What was built
 
@@ -54,18 +62,11 @@ Opaque panels keep text independent of the background artwork. Measured ratios: 
 
 ## Evidence
 
-- Desktop, production (historical evidence retained in Git history).
-- 360px mobile, production (historical evidence retained in Git history).
-- 320px mobile, production (historical evidence retained in Git history).
-- Keyboard focus, production (historical evidence retained in Git history).
-- Production MVP checks (historical evidence retained in Git history).
-- Development MVP checks (historical evidence retained in Git history).
-- 42 state assertions, production (historical evidence retained in Git history).
-- Repository check (historical evidence retained in Git history).
+Desktop, 360px, 320px, keyboard-focus captures, and development, production, state, and repository reports are directly accessible in the [MVP evidence snapshot](https://github.com/Abbasylas/TechTalks/tree/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4/docs/evidence), preserved by the [MVP commit](https://github.com/Abbasylas/TechTalks/commit/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4). The [evidence index](evidence/README.md) lists the selected screenshots retained locally.
 
 ## Not verified
 
-Actual spoken screen-reader announcements, physical mobile devices, Firefox/Safari/Edge, every operating-system rendering, exhaustive credential formats or full Git history, and pixel-perfect equivalence to every Stitch detail were not verified. No user research or product validation is claimed. Storage remains local to this browser/site address; no cross-device or live cross-tab sync is included.
+Actual spoken screen-reader announcements, physical mobile devices, Firefox/Safari/Edge, every operating-system rendering, exhaustive credential formats or full Git history, and pixel-perfect equivalence to every Stitch detail were not verified. Muhammad’s user test is recorded above; broader product validation remains outside these checks. Storage remains local to this browser/site address; no cross-device or live cross-tab sync is included.
 
 ## Character layout follow-up (16 October 2026)
 
@@ -98,14 +99,19 @@ The zero-progress criterion applies to a browser with no saved data. Returning u
 
 Temporary results stayed under ignored output/playwright/; no raw JSON or additional screenshots were added to the curated evidence folder.
 
-## Small pilot — fictional example
+## Final assignment verification
 
-This is an illustrative scenario, not a test that actually took place. The actions and quotes below are invented; replace them with real observations after asking a classmate or friend to try the dashboard.
+Rechecked on 23 October 2026 against the production build at `http://127.0.0.1:3001`, using Chromium. These corrections change documentation only; the website’s design and functionality are preserved.
 
-In this scenario, I ask my classmate Maya to try the dashboard on my laptop without explaining where anything is. She spots the training tasks below the progress bar and reads the three names. She chooses Sword control, clicks its checkbox, and notices the percentage change from 0% to 33%. “Okay, that was easy. Can I uncheck it if I clicked the wrong one?” She clicks it again, sees the progress return to zero, then marks it complete once more.
+| Check | Result |
+| --- | --- |
+| Existing lint and build scripts | Passed: ESLint, Webpack compilation, TypeScript, and static page generation. |
+| `scripts/check-poc.cjs` | All 42 state checks passed, including completion, undo, 20 repeated toggles, all eight combinations, refresh persistence, malformed data, duplicate/unknown IDs, and blocked storage. |
+| `scripts/check-mvp.cjs` | All 14 UI check groups passed, including content, progress, keyboard navigation, disclosures, accessibility markup, images, contrast, and layouts at 1440px, 360px, and 320px. No page errors, console errors, or failed HTTP responses. |
+| Additional mobile checks | Completion, undo, full completion, and saved-state restoration after refresh passed at both 360px and 320px in fresh touch-enabled browser contexts. No page errors or horizontal overflow. |
+| Visual inspection | Desktop, 360px, and 320px screenshots inspected; text, controls, and character cards remain readable without clipping. |
+| `scripts/check-repository.cjs` | Passed: one application page, one Client Component, expected scripts, no detected credential signatures or environment files. |
 
-When I ask what 33% means, she initially says, “He’s a third ready to fight?” After reading the explanation under the bar, she corrects herself: “Oh, it’s because I finished one of the three tasks. It doesn’t mean he’s strong enough yet.” Finding and completing a task felt straightforward; interpreting the percentage needed a second look. She noticed the large number before the smaller explanation.
+The environment did not expose npm on PATH, so the exact lint/build script targets were run directly with Node: `node node_modules/eslint/bin/eslint.js` and `node node_modules/next/dist/bin/next build --webpack`. An initial attempt through the bundled pnpm launcher triggered an unwanted dependency install and failed; the moved packages were restored before these successful checks. Package manifests and lockfiles were not changed.
 
-**One improvement I would make:** put “1 of 3 training tasks complete” directly beside the percentage. The current explanation can stay, but the number would make sense without needing to look elsewhere. This is a proposed improvement; it has not been implemented or tested with a real participant.
-
-A real pilot could help identify usability issues. This fictional example provides no user-research evidence, and even a small real pilot would not establish market demand.
+Generated reports and screenshots remain under ignored `output/playwright/`; the state runner’s fixed “development server” report label does not identify this run’s server mode. The actual target was the production server above. Real devices, other browsers, and spoken screen-reader output remain unverified. The live MCP screenshot limitation is documented in [MCP.md](MCP.md#screenshot-still-required).
