@@ -1,6 +1,13 @@
 # Training progress proof of concept
 
-**Current status:** The POC led to the implemented MVP. Completion now persists in localStorage; the original reset-on-refresh behaviour below is historical. See [REVIEW.md](REVIEW.md) for current results and [README.md](../README.md) for current run commands.
+## Summary
+
+- **Question:** Do completion, undo, repeated toggles, and the progress summary stay consistent?
+- **Result:** The original POC passed 36 state checks, supporting the decision to continue to the MVP.
+- **Current behaviour:** The MVP adds browser saving; the latest verification passed 42 state checks, including refresh persistence and invalid-storage handling.
+- **Decision:** Reuse the proven task-state logic. See [REVIEW.md](REVIEW.md) for current results and [README.md](../README.md) for run commands.
+
+The original plain layout and reset-on-refresh behaviour below are historical.
 
 ## Historical experiment — 16 October 2026
 

@@ -1,6 +1,13 @@
 # Design
 
-**Current status:** The MVP uses a character sidebar on desktop, character cards after the training plan on mobile, locally served Space Grotesk and Plus Jakarta Sans, and browser saving. See the final implementation sections and [REVIEW.md](REVIEW.md) for verification. Earlier layouts, fonts, refresh-reset text, and unchecked verification items below are historical recommendations.
+## Summary
+
+- **Appearance:** Dark panels, crimson and gold accents, supplied character portraits, and a documented AI-restored background.
+- **Layout:** Training progress and three task cards, with character cards beside the plan on desktop and below it on mobile.
+- **Typography and controls:** Locally served Space Grotesk and Plus Jakarta Sans, labelled checkboxes, and visible keyboard focus.
+- **Status:** Implemented and checked at desktop and mobile sizes; progress saves in the browser. See [REVIEW.md](REVIEW.md).
+
+Earlier layouts, font choices, reset-on-refresh text, and unchecked checklists below are historical. The final implementation sections describe the current design.
 
 Use [PRD.md](PRD.md) as the source of product requirements.
 

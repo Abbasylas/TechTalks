@@ -1,6 +1,21 @@
 # Stitch MCP retrieval
 
-**Current status:** Historical read-only Stitch calls and their saved results were inspected. The [existing request/result screenshot](evidence/stitch-mcp-record-project-list.png) is preserved. Stitch tools are not exposed in this session, so a new Stitch call could not be made or captured. An expanded successful call screenshot remains outstanding.
+## Summary
+
+- **Purpose:** Retrieve the reviewed dashboard design from Google Stitch for implementation.
+- **Successful call:** `mcp__stitch__get_screen` returned **Asta’s Preparation Dashboard - Refined Desktop**, device type **DESKTOP**, size **2560 × 2048**, and HTML/screenshot links.
+- **Evidence:** The [new successful-call record](evidence/stitch-successful-call.json) preserves the actual request and returned metadata. Existing screenshots and historical commit links remain below.
+- **Status:** The read-only call succeeded in this session. A screenshot of its expanded native call UI is not included; the existing image shows a saved record.
+
+## Successful call in this session
+
+Request:
+
+```json
+{"name":"projects/2928567958381260943/screens/9ada80764aa84ab5a2bc41d93613c0b3"}
+```
+
+The returned screen name matched the request, with the title, dimensions, device type, and asset links listed above. The [saved result](evidence/stitch-successful-call.json) omits asset download URLs and retains the returned file identifiers. No design was generated or changed.
 
 ## Host, client, and server
 
@@ -51,9 +66,9 @@ The original Stitch tool metadata was inspected before calling the server. It ex
 
 ## Screenshot still required
 
-The historical JSON and screenshot were checked against each other: both show `mcp__stitch__list_projects`, input `{}`, five returned projects, and the matched Asta project. The screenshot is a view of the saved record in VS Code. This session has neither a callable Stitch tool nor native Codex UI capture, so it cannot supply a new screenshot of an expanded successful Stitch call.
+The historical JSON and screenshot match: both show `mcp__stitch__list_projects`, input `{}`, five returned projects, and the matched Asta project. The image shows the saved record in VS Code. The new successful call is recorded above; an expanded native call UI screenshot has not been captured.
 
-When Stitch is available, run a read-only call and capture its expanded tool name, request, and successful returned result with credentials hidden. Save that screenshot in `docs/evidence/` and link it here. Existing evidence remains intact.
+To complete the screenshot evidence, capture the successful call above with its tool name, request, and returned result expanded, with credentials hidden. Save it in `docs/evidence/` and link it here.
 
 ## MVP design-context retrieval (16 October 2026)
 

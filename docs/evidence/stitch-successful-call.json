@@ -1,0 +1,22 @@
+{
+  "tool": "mcp__stitch__get_screen",
+  "request": {
+    "name": "projects/2928567958381260943/screens/9ada80764aa84ab5a2bc41d93613c0b3"
+  },
+  "status": "success",
+  "response": {
+    "name": "projects/2928567958381260943/screens/9ada80764aa84ab5a2bc41d93613c0b3",
+    "title": "Asta’s Preparation Dashboard - Refined Desktop",
+    "deviceType": "DESKTOP",
+    "width": "2560",
+    "height": "2048",
+    "htmlCode": {
+      "name": "projects/2928567958381260943/screens/9ada80764aa84ab5a2bc41d93613c0b3/fileEntries/html",
+      "mimeType": "text/html"
+    },
+    "screenshot": {
+      "name": "projects/2928567958381260943/screens/9ada80764aa84ab5a2bc41d93613c0b3/fileEntries/screenshot"
+    }
+  },
+  "redactions": "Asset download URLs omitted from the successful returned response. This is a saved call record, not a screenshot of the native tool UI."
+}

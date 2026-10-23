@@ -1,10 +1,11 @@
 # Asta’s Preparation Dashboard
 
-**Current status:** The MVP implements task completion, undo, calculated progress, and browser saving. [REVIEW.md](REVIEW.md) records current verification and Muhammad’s user test. Browser saving is part of the current requirements.
-
 ## Summary
 
-A single-screen dashboard that helps Asta track three training tasks while preparing for Lucifero. Asta can mark each task complete, undo completion, and see preparation progress calculated from the number of completed tasks.
+- **Purpose:** Help Asta track Sword control, Physical endurance, and Team coordination while preparing for Lucifero.
+- **Features:** Complete or undo tasks, see the completed count and percentage, and keep progress after refresh in the same browser.
+- **Calculation:** Each task counts equally; progress is completed tasks ÷ 3 × 100, rounded to a whole number.
+- **Scope and status:** Implemented as one dashboard without accounts or a database. [REVIEW.md](REVIEW.md) records passing checks and Muhammad’s user test.
 
 This is a fictional learning project. Muhammad’s user test is documented in [REVIEW.md](REVIEW.md#user-testing--muhammad); broader product validation remains outside this assignment.
 
