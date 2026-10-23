@@ -49,3 +49,9 @@ There are two details to update: the fixed “Demo contributor 01” label and t
 ## 8. What did I verify instead of assuming?
 
 I checked that the preview delay did not hold up the whole page. On a fresh request, the shell arrived at 127 ms and the preview at 2,130 ms. I also captured the loading message while the rest of the page stayed visible. The screenshot shows the state; the streamed response gave me the timing.
+
+## One AI suggestion
+
+- Suggestion: AI recommended using `await connection()` before the preview’s two-second delay. This was also mentioned in the assignment hint. It keeps the delay from finishing during the build.
+- Check: The AI checked the installed Next.js guide, built the app, and tested a fresh request. The shell arrived at 127 ms and the preview at 2,130 ms. It also captured the loading state in the browser.
+- Decision: Accepted. It kept the loading demo visible on a fresh request without holding up the rest of the page. The delay stays labeled as a learning simulation.
