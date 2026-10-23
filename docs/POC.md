@@ -2,12 +2,12 @@
 
 ## Summary
 
-- **Question:** Do completion, undo, repeated toggles, and the progress summary stay consistent?
-- **Result:** The original POC passed 36 state checks, supporting the decision to continue to the MVP.
-- **Current behaviour:** The MVP adds browser saving; the latest verification passed 42 state checks, including refresh persistence and invalid-storage handling.
-- **Decision:** Reuse the proven task-state logic. See [REVIEW.md](REVIEW.md) for current results and [README.md](../README.md) for run commands.
+- **Question:** Does progress stay correct when tasks are checked, unchecked, and changed repeatedly?
+- **Result:** The first experiment passed 36 state checks, so development continued to the MVP.
+- **What changed later:** Browser saving was added. The latest version passed 42 state checks, including refresh and invalid saved data.
+- **Decision:** Keep the task-state logic from the POC. See [REVIEW.md](REVIEW.md) for the latest results and [README.md](../README.md) to run the app.
 
-The original plain layout and reset-on-refresh behaviour below are historical.
+The notes below start with the original plain screen, where progress still reset on refresh.
 
 ## Historical experiment — 16 October 2026
 
@@ -15,17 +15,17 @@ Decision: **Continue**.
 
 ## Question
 
-Can task completion and the progress summary stay consistent when tasks are completed, undone, and toggled repeatedly?
+Will the count and percentage stay correct when tasks are completed, undone, or changed several times?
 
 ## Approach
 
-Build one plain Next.js client screen with three predefined labels, native checkboxes, status text, a completed / total count, and a percentage. All tasks start incomplete. No artwork, full dashboard styling, database, or persistence is included.
+The first test used a plain Next.js screen with three tasks, native checkboxes, status text, a count, and a percentage. All tasks started incomplete. Artwork, full styling, a database, and browser saving were left for later.
 
-Keep the task array as the single source of truth. A functional state update toggles the selected task. Derive the count from current completed tasks and calculate `Math.round(completed / total * 100)` each render. Do not maintain separate count or percentage state.
+The task array held the completion state. Checking a box updated that task, then the count and percentage were calculated from the completed tasks using `Math.round(completed / total * 100)`. Keeping these values together avoided separate totals falling out of sync.
 
 ## Actual test results
 
-Tested the running local Next.js app using headless Chromium with the bundled Playwright library. The CLI launcher was unavailable in this environment. The retained browser runner is `scripts/check-poc.cjs` in the application repository; its results compare displayed values against actual checkbox states after each action.
+The local app was tested in headless Chromium using the bundled Playwright library because the CLI launcher was unavailable. The script, `scripts/check-poc.cjs`, checks that the displayed count and percentage match the checked boxes after each action.
 
 | Action | Actual result | Outcome |
 | --- | --- | --- |
@@ -40,23 +40,23 @@ Tested the running local Next.js app using headless Chromium with the bundled Pl
 | Space completes and undoes a focused checkbox | 1 / 3, 33%, then 0 / 3, 0% | Pass |
 | View at 320px | No horizontal page overflow | Pass |
 
-All **36 state assertions passed**; no browser page errors were recorded during the successful run. Lint and TypeScript checks passed. The Webpack production build passed and generated the single dashboard route.
+All **36 state checks passed**, with no page errors during the successful run. Lint, TypeScript, and the Webpack production build also passed.
 
-## Issue or observation
+## What went wrong during setup
 
-The default Turbopack development server returned HTTP 500 because its CSS worker failed to spawn with an access-denied error. Retrying outside the sandbox produced the same failure. Switching to the built-in Webpack compiler allowed the page to run and the browser checks to pass. Basic CSS keeps this experiment readable without depending on generated utility styles under that fallback. This is an environment/build-tool observation, not a task-state failure.
+The default Turbopack server returned HTTP 500 after its CSS worker failed to start with an access-denied error. Retrying outside the sandbox did not help. Switching to Webpack allowed the page to load and the browser checks to pass. Basic CSS kept the experiment readable while this was being resolved. The problem came from the build setup; task-state checks passed once the page was running.
 
-The rounding is intentional: one task is 33% and two tasks are 67%. Adding a fixed 33 for each task would give the wrong result at full completion; deriving progress from current task states avoids that drift.
+Rounding gives 33% for one task and 67% for two. Adding 33 for every task would stop at 99%, so progress is recalculated from the completed count each time.
 
 ## Decision
 
-**Continue** to the MVP. The central interaction passed completion, undo, repeated-toggle, and combination checks. Reuse the task-state logic while adding the agreed design later. Investigate the Turbopack worker issue before relying on the default development command. This POC does not validate the full design, screen-reader behaviour, all browsers, or the product with users.
+**Continue** to the MVP. Completion, undo, repeated changes, and all task combinations worked. The next step was to reuse this logic in the agreed design and resolve the development setup. The POC only tested that interaction; it did not cover the full design, spoken screen-reader output, other browsers, or user testing.
 
 ## Run and reproduce
 
-From the repository root (`asta/`), run `npm run dev`, then open http://127.0.0.1:3000. The script already selects Webpack. The table above records the original experiment; refresh now restores saved completion.
+From `asta/`, run `npm run dev` and open http://127.0.0.1:3000. Webpack is already selected. Remember that the table above describes the first experiment; the current app remembers progress after a refresh.
 
-For the saved automation, make the Playwright package available to Node (the recorded run used the bundled runtime via `NODE_PATH`) and run `node scripts/check-poc.cjs`. The runner writes screenshots and JSON results under `output/playwright/`. No test dependency was added to the application.
+To repeat the automated checks, make Playwright available to Node and run `node scripts/check-poc.cjs`. The recorded run used the bundled runtime through `NODE_PATH`. Screenshots and JSON results go to `output/playwright/`; no test dependency was added to the app.
 
 ## Evidence and Git history
 
@@ -67,40 +67,42 @@ For the saved automation, make the Playwright package available to Node (the rec
 
 ![POC after undoing Sword control](evidence/poc-after-undo.png)
 
-The Git repository is `asta/`, on branch `assignment-2-asta-mvp`. The original experiment is preserved in [Test training progress proof of concept](https://github.com/Abbasylas/TechTalks/commit/0901dc329dd632c114d1499077ecea49909b111c); browser saving was added in [Preserve training progress in browser storage](https://github.com/Abbasylas/TechTalks/commit/0ab57097b306b0a6297c5ee2fa0454e203ba87cf). Canonical documentation is in this repository’s `docs/` directory.
+The repository is in `asta/`, on `assignment-2-asta-mvp`. See the [original POC commit](https://github.com/Abbasylas/TechTalks/commit/0901dc329dd632c114d1499077ecea49909b111c) and the [browser-saving update](https://github.com/Abbasylas/TechTalks/commit/0ab57097b306b0a6297c5ee2fa0454e203ba87cf). The project documentation lives in `docs/`.
 
 
 ## Follow-up: browser persistence (16 October 2026)
 
-The user requested refresh-safe progress without a database after the original POC commit. This supersedes the original reset-on-refresh behaviour documented above.
+After the first POC, the owner asked for progress to survive a refresh without adding a database. Browser saving replaced the original reset behaviour.
 
-Completed task IDs are now saved to localStorage under `asta-training-completion-v1`. Storage is read after hydration, with controls disabled until loading finishes; the initial empty state never overwrites saved progress. Count and percentage remain derived from the task states. New visitors start incomplete. Saving errors do not prevent toggling; the page displays a warning. Data belongs to this browser/site address and may be removed by clearing browser data or private browsing. There is no cross-device sync or live cross-tab synchronisation.
+Completed task IDs are saved in localStorage under `asta-training-completion-v1`. After the page loads in the browser, it restores saved progress before enabling the checkboxes. This prevents the empty starting state from overwriting earlier progress. The count and percentage still come from the task states. New visitors start with no tasks complete.
+
+If saving fails, the tasks still work and the page shows a warning. Progress stays in the same browser and site address. Clearing browser data or using private browsing can remove it. It is not shared across devices or updated live between tabs.
 
 ### Actual follow-up results
 
 - All **41 state checks passed**, including the original completion/undo/repeated-toggle combinations.
 - Refresh after full completion restored 3 / 3 and 100%.
 - Refresh after undo restored 2 / 3 and 67%.
-- Keyboard completion/undo remained consistent with restored state.
-- Malformed saved JSON fell back without crashing; the next toggle repaired it and survived refresh.
-- Blocked reads/writes left tasks usable and displayed the saving warning.
+- Keyboard completion and undo still worked after saved progress was restored.
+- Invalid saved JSON did not crash the app; changing a task repaired it, and the new state survived refresh.
+- When storage was blocked, tasks stayed usable and the saving warning appeared.
 - No browser page errors; no horizontal overflow at 320px.
 - Lint and TypeScript checks passed.
 
-Evidence: persisted state screenshot (historical evidence retained in Git history) and follow-up results (historical evidence retained in Git history). Original screenshots and test results are preserved as historical evidence.
+The saved-progress screenshot and follow-up results remain in Git history, alongside the original screenshots and test results.
 
-Decision: **Continue** with browser persistence. No database or full design was added.
+Decision: **Continue** with browser saving. This step added neither a database nor the full design.
 
 ## Standard commands without Turbopack (16 October 2026)
 
-Turbopack is optional. The package scripts now select Webpack for both `npm run dev` and `npm run build`. Removed the Turbopack CSS rules and `@tailwindcss/turbopack` dependency; configured Tailwind through `@tailwindcss/postcss` and updated the npm lockfile. The development origin configuration accepts both localhost and 127.0.0.1.
+The package scripts were updated to use Webpack for both `npm run dev` and `npm run build`. The Turbopack CSS rules and `@tailwindcss/turbopack` dependency were removed. Tailwind now uses `@tailwindcss/postcss`, and the npm lockfile was updated. The development setup accepts both localhost and 127.0.0.1.
 
-Verified the npm development script starts and serves the dashboard, the npm production build exits successfully, and `npm run start` serves the built application. The 41 state checks passed against both development and production, including persistence, undo, repeated toggles, malformed storage, and blocked storage. Lint passed with no warnings. No browser page errors were recorded in either successful test run.
+The development server started, the production build completed, and `npm run start` served the built app. All 41 state checks passed in both development and production, including saving, undo, repeated changes, invalid saved data, and blocked storage. Lint passed without warnings, and neither successful browser run reported page errors.
 
-Evidence: Webpack development results (historical evidence retained in Git history) and Webpack production results (historical evidence retained in Git history). These checks cover the current POC; repeat the standard build and interaction checks when the MVP is complete.
+The Webpack development and production results are preserved in Git history. They covered the POC at that stage; the later MVP checks are recorded in [REVIEW.md](REVIEW.md).
 
-The earlier `npm run dev -- --webpack` workaround is no longer necessary: use `npm run dev` directly from `asta/`.
+Use `npm run dev` from `asta/`. The earlier extra `--webpack` flag is no longer needed.
 
 ## MVP reuse (16 October 2026)
 
-The POC interaction now powers the implemented dashboard in `components/training-plan.tsx`; its original commit remains visible. It retains browser persistence, the same storage key, independent toggles, and derived count/percentage. The fixed task labels, descriptions and priorities are supplied from `lib/training-tasks.ts` by the static page. One additional check confirms duplicate/unknown stored IDs cannot inflate progress, bringing the state suite to 42 passing assertions. Both development and production passed. See [REVIEW.md](REVIEW.md) for the actual MVP acceptance results and remaining verification limits.
+The dashboard reuses the POC logic in `components/training-plan.tsx`, including browser saving, the same storage key, independent checkboxes, and calculated progress. The static page supplies task labels, descriptions, and priorities from `lib/training-tasks.ts`. An extra check confirms that duplicate or unknown saved IDs cannot inflate progress, bringing the total to 42 passing state checks in development and production. See [REVIEW.md](REVIEW.md) for the results and what still needs checking.

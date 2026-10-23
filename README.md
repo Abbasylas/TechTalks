@@ -2,20 +2,20 @@
 
 **Author: Abbas Al Shab**
 
-**Current status:** The MVP supports three training tasks, completion and undo, calculated progress, and localStorage saving. Muhammad’s user test is recorded in the review. [Native Stitch call screenshots](docs/MCP.md#native-call-screenshots) and the saved request/result are included.
+**Current status:** The dashboard is working. You can complete or undo three training tasks, see your progress, and pick up where you left off after a refresh. The docs include Muhammad’s user test and [screenshots of the successful Stitch call](docs/MCP.md#native-call-screenshots).
 
-A single-screen training dashboard built with Next.js, TypeScript and Tailwind. It follows the reviewed Stitch design, uses the three supplied images, and tracks completion of a fixed preparation plan with browser-local saving.
+Asta’s Preparation Dashboard keeps a small training plan in one place. It was built with Next.js, TypeScript, and Tailwind, using the reviewed Stitch design and supplied artwork. Progress is saved in your browser.
 
 ## Run locally
 
-From this directory:
+Run these commands from this directory:
 
 ```sh
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000. Both `npm run dev` and `npm run build` explicitly use Webpack. No Turbopack flags or CSS loader are required. Tailwind CSS uses the standard `@tailwindcss/postcss` integration.
+Open http://localhost:3000. Development and production builds already use Webpack, so you don’t need any extra flags. Tailwind runs through `@tailwindcss/postcss`.
 
 ## Production
 
@@ -32,17 +32,17 @@ npm run lint
 
 | Document | Contents |
 | --- | --- |
-| [REVIEW.md](docs/REVIEW.md) | Muhammad’s user test, acceptance results, and verification limits. |
-| [MCP.md](docs/MCP.md) | Recorded Stitch calls, native call screenshots, and commit links. |
+| [REVIEW.md](docs/REVIEW.md) | How Muhammad used the site, what passed testing, and what still needs checking. |
+| [MCP.md](docs/MCP.md) | What Stitch returned, screenshots of the call, and links to earlier commits. |
 | [Reflection](docs/QUESTIONS.md) | Abbas Al Shab’s assignment reflection. |
-| [PRD](docs/PRD.md) | Current requirements and acceptance criteria. |
-| [Design](docs/DESIGN.md) | Current design summary and labelled historical recommendations. |
-| [POC](docs/POC.md) | Original experiment and later browser-saving update. |
-| [Evidence index](docs/evidence/README.md) | Retained screenshots and links to historical records. |
+| [PRD](docs/PRD.md) | What the dashboard should do and how to check it. |
+| [Design](docs/DESIGN.md) | The current layout and the earlier ideas that led to it. |
+| [POC](docs/POC.md) | The first task-progress test and the later browser-saving update. |
+| [Evidence index](docs/evidence/README.md) | Screenshots, saved results, and earlier records. |
 
-Completion is saved in localStorage for this browser and site address; no database is used. Historical POC instructions about resetting on refresh and early design recommendations are superseded by the current implementation.
+The app uses localStorage to remember completed tasks in the same browser at the same site address. Earlier notes about progress resetting on refresh describe the original experiment, before saving was added.
 
-With a server running, the existing browser checks are:
+Start the server, then run the checks:
 
 ```sh
 node scripts/check-poc.cjs
@@ -50,8 +50,8 @@ node scripts/check-mvp.cjs
 node scripts/check-repository.cjs
 ```
 
-The browser runners require Playwright to be available to Node (the recorded runs use the bundled runtime through `NODE_PATH`). Set `POC_BASE_URL` to test another server, such as `http://127.0.0.1:3001` for production. Generated results and screenshots go to ignored `output/playwright/`. See [the current verification results](docs/REVIEW.md#final-assignment-verification).
+The browser checks need Playwright. The recorded runs used the bundled copy through `NODE_PATH`. To check a different server, set `POC_BASE_URL`, for example to `http://127.0.0.1:3001` for production. Results and screenshots are written to the ignored `output/playwright/` folder. See [the latest results](docs/REVIEW.md#final-assignment-verification).
 
 ## Repository
 
-[Abbasylas/TechTalks](https://github.com/Abbasylas/TechTalks), branch `assignment-2-asta-mvp`. Make project changes and pushes on this branch. Pushing the final corrections requires the owner’s authorization.
+The project is in [Abbasylas/TechTalks](https://github.com/Abbasylas/TechTalks) on `assignment-2-asta-mvp`. Keep changes and pushes on this branch. Ask the owner before pushing the final corrections.

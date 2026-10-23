@@ -2,36 +2,36 @@
 
 ## Summary
 
-- **Appearance:** Dark panels, crimson and gold accents, supplied character portraits, and a documented AI-restored background.
-- **Layout:** Training progress and three task cards, with character cards beside the plan on desktop and below it on mobile.
-- **Typography and controls:** Locally served Space Grotesk and Plus Jakarta Sans, labelled checkboxes, and visible keyboard focus.
-- **Status:** Implemented and checked at desktop and mobile sizes; progress saves in the browser. See [REVIEW.md](REVIEW.md).
+- **Look:** Dark panels, crimson and gold accents, the supplied character portraits, and an AI-restored copy of the background.
+- **Layout:** Progress and three task cards are the main focus. Character cards sit beside them on desktop and below them on mobile.
+- **Text and controls:** Space Grotesk and Plus Jakarta Sans are served locally. Checkboxes have clear labels and visible keyboard focus.
+- **Status:** The design is built and has passed desktop and mobile layout checks. Progress saves in the browser. See [REVIEW.md](REVIEW.md).
 
-Earlier layouts, font choices, reset-on-refresh text, and unchecked checklists below are historical. The final implementation sections describe the current design.
+The notes below show how the design changed. Earlier layouts, fonts, reset-on-refresh wording, and unchecked checklists describe past stages. The final sections explain what was built.
 
-Use [PRD.md](PRD.md) as the source of product requirements.
+The dashboard’s requirements are in [PRD.md](PRD.md).
 
 ## Historical design review — evidence and limits
 
 [Original Stitch design screenshot](https://github.com/Abbasylas/TechTalks/blob/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4/docs/evidence/stitch-design-before.png) (historical evidence).
 
-The supplied screenshot shows desktop and mobile designs inside Stitch at 28% canvas zoom. Review concerns below refer to the dashboard previews, not the surrounding Stitch or browser controls. Fine text, exact font sizes, colour contrast, control dimensions, keyboard behaviour, and actual mobile overflow cannot be verified from this screenshot. Text in the Stitch conversation is not proof that accessibility or functionality passes.
+The original screenshot shows desktop and mobile previews in Stitch at 28% zoom. The review focused on those previews. At that scale, the screenshot could not confirm small text, exact sizes, contrast, keyboard use, or mobile scrolling. Those details needed to be checked in the working app.
 
 ## Updated mockup
 
 ![Updated Stitch dashboard mockup](evidence/stitch-design-updated.png)
 
-Source: Screenshot (27).png, supplied by the user on 15 October 2026. This is the latest supplied design reference; the original screenshot above is retained for comparison.
+The owner supplied Screenshot (27).png on 15 October 2026. It shows the revised design; the original is linked above for comparison.
 
-Visible improvements include a more prominent Asta dashboard title, a compact character header, preparation progress above three stacked task cards, left-aligned completion controls, removal of the large threat and sword-output panels, and more visible background artwork behind dark content panels. The crimson and gold accents remain.
+The revision gives the dashboard title more space, places progress above the three tasks, and moves checkboxes to the left. It removes the large threat and sword-output panels and lets more of the artwork show behind the dark panels. The crimson and gold accents stay.
 
-The requested direction is a more human, thoughtfully composed interface: natural wording, balanced spacing, restrained decoration, and fewer redundant labels. Keep the background recognisable by reducing the dark overlay where needed, while preserving opaque text panels and readable contrast. This supersedes the earlier suggestion to start with an approximately 80% overlay.
+The aim was to make the page easier to read, with natural wording, comfortable spacing, and less decoration. Reducing the dark overlay made the background more recognisable while solid panels kept text clear. This replaced the earlier suggestion to start with an overlay of around 80%.
 
-The updated screenshot is also at 28% canvas zoom. It records visual progress, not proof of font sizes, contrast, mobile usability, checkbox state, or working interactions. Full-size review and prototype checks remain necessary.
+This screenshot is also at 28% zoom. It shows the visual changes, but font sizes, contrast, mobile use, and checkbox behaviour still needed full-size and browser checks at that stage.
 
 ## Original review recommendations
 
-The following table records the initial review. Several layout corrections are visible in the updated mockup above; remaining details require full-size verification.
+These were the suggestions from the first review. Some are visible in the revised mockup; the rest needed checking at full size.
 
 | Priority | Visible concern | Proposed change |
 | --- | --- | --- |
@@ -39,9 +39,9 @@ The following table records the initial review. Several layout corrections are v
 | High | A large Lucifero threat assessment panel competes with progress and tasks. Threat levels, operation details, and sword-output content add unrelated information. | Remove these panels and invented metrics. Keep Lucifero as a small contextual portrait within the header. Give the available space to preparation progress and the task list. |
 | High | Progress is confined to the right column beneath the desktop introduction. | Move one full-width preparation summary directly below the header. Show a prominent percentage, the completed / total count, and one horizontal progress bar. |
 | High | Desktop checkboxes appear at the far right, while mobile checkboxes appear at the left. Their visible marks are very small at this zoom. | Place a labelled checkbox on the left of every task on both layouts. Provide a minimum 44 × 44px activation area and an unmistakable unchecked initial state. Verify actual dimensions at full size. |
-| High | Descriptions, statuses, and supporting labels look visually subordinate and dense in the scaled previews. | Use 16px descriptions with 1.5 line height and 14px status and badge text. Remove unnecessary tiny labels. Verify readability at 100% zoom before judging final size. |
+| High | Descriptions, statuses, and labels look small and crowded in the previews. | Use 16px descriptions with 1.5 line height and 14px status and badge text. Remove tiny labels that add little, then check readability at 100% zoom. |
 | Medium | Desktop uses a broad threat column and a narrower task column; mobile gives antagonist content early prominence. | Use the same content order on both: compact character header, preparation summary, three stacked task cards, refresh note. |
-| Medium | Decorative warnings, quotes, utility icons, and footer-style labels add visual competition. | Remove nonessential warnings, motivational quote panels, navigation-like labels, and inactive utility icons from the dashboard itself. Keep exactly the three task interactions. |
+| Medium | Warnings, quotes, icons, and footer labels draw attention away from the tasks. | Remove the extra warnings, quotes, navigation labels, and inactive icons. Keep the three task interactions. |
 | Medium | The background artwork is difficult to identify in the screenshot. | Use images (2).jpg as the page background with a dark overlay starting around 80% opacity. Adjust only enough to reveal atmosphere while keeping panels and text clear. |
 | Medium | The antagonist portrait dominates the desktop artwork. | Use images (3).jpg as Asta’s header portrait and images (4).jpg as a smaller Lucifero portrait beside the subtitle. Preserve proportions and keep both secondary to the title. |
 
@@ -71,7 +71,7 @@ The following table records the initial review. Several layout corrections are v
 | Crimson accent | #F05264 | Progress, checked controls, focus indicators |
 | Muted gold | #D8B46A | Priority labels and restrained decoration |
 
-Use a small crimson edge accent consistently. Avoid large glows or additional accent colours. Do not use priority colour as the only label. Render background imagery with proportional cropping rather than stretching; avoid enlarging the small portrait sources into prominent panels.
+Use a small crimson accent along the edges, without adding large glows or more accent colours. Always write out the priority as well as using colour. Crop artwork without stretching it, and avoid making the small portraits too large.
 
 ## Historical typography and spacing specification
 
@@ -93,17 +93,17 @@ Use a small crimson edge accent consistently. Avoid large glows or additional ac
 | Name-to-description gap | 8px |
 | Panel corners | 12px radius |
 
-Reserve uppercase text for short section labels. Keep descriptions in sentence case. Use natural card heights so content can wrap without clipping.
+Use uppercase for short labels and sentence case for descriptions. Let cards grow with their content so wrapped text is not cut off.
 
 ## Interaction and accessibility requirements
 
-- All three checkboxes start unchecked. Show “Incomplete” until checked, then “Complete.” Completion can be undone.
-- Keep completed task content readable; communicate completion with text and a checkmark as well as colour.
-- Update percentage, count, and progress bar together: 0 / 3 = 0%, 1 / 3 = 33%, 2 / 3 = 67%, 3 / 3 = 100%. Priorities do not affect weighting.
-- Support Tab navigation and Space to toggle, with visible focus and no focus movement after a toggle.
-- Associate each checkbox with its task name. Provide an accessible progress label and value, and politely announce updated progress.
-- Verify contrast against the final composited background: 4.5:1 for normal text, 3:1 for large text, and 3:1 for essential control indicators.
-- Verify a readable 320px-wide layout without horizontal scrolling. Decorative images must not interrupt the accessible reading order.
+- New visitors start with all three tasks unchecked. Show “Incomplete” until a task is checked, then “Complete.” Allow either action to be undone.
+- Keep completed tasks readable. Use text and a checkmark as well as colour to show their status.
+- Update the percentage, count, and bar together: 0 / 3 = 0%, 1 / 3 = 33%, 2 / 3 = 67%, 3 / 3 = 100%. Every task counts equally, whatever its priority.
+- Let users reach checkboxes with Tab and change them with Space. Make focus visible and keep it on the checkbox after a change.
+- Give each checkbox its task name. Make the progress label and value readable by assistive technology, with a polite announcement when progress changes.
+- Check contrast on the finished page: 4.5:1 for normal text, 3:1 for large text, and 3:1 for essential control indicators.
+- Keep the page readable at 320px wide without sideways scrolling. Decorative images should not interrupt the reading order.
 - No animation is required.
 
 ## Historical follow-up checklist
@@ -114,30 +114,30 @@ Reserve uppercase text for short section labels. Keep descriptions in sentence c
 - [ ] Test initial, partial, complete, and undone completion states.
 - [ ] Check keyboard operation, screen-reader announcements, and the 320px layout in a working prototype.
 
-The original screenshot is preserved at the historical link above; the updated screenshot remains in `evidence/`. At this review stage, full-size captures and implementation checks were pending. Later implementation results are recorded below and in [REVIEW.md](REVIEW.md).
+The original screenshot is linked above, and the revision is in `evidence/`. Full-size captures and browser checks had not been completed at this stage. The later results are below and in [REVIEW.md](REVIEW.md).
 
 ## Browser saving update (16 October 2026)
 
-The user added localStorage persistence. Replace the earlier refresh-reset footer with “Progress is saved in this browser.” Show “Loading saved progress…” while restoring state, and disable completion controls until restoration finishes. When saving is unavailable, show “Browser saving is unavailable. Progress may reset on refresh.” The layout and plain POC scope remain unchanged.
+The owner asked for progress to be saved in the browser. The footer now says “Progress is saved in this browser.” While saved tasks are loading, show “Loading saved progress…” and keep the checkboxes disabled. If saving fails, show “Browser saving is unavailable. Progress may reset on refresh.” This update kept the POC’s layout and scope.
 
 ## Implemented MVP (16 October 2026)
 
-The refined Stitch desktop and mobile screens were retrieved through `mcp__stitch__get_screen`, and their HTML exports were downloaded and inspected. The implementation follows their single-column header → progress → task cards layout, dark panels, crimson and gold accents, Asta portrait, smaller Lucifero portrait, and visible background. The local earlier Barlow Condensed/Inter suggestion is superseded by the selected Stitch fonts: Space Grotesk and Plus Jakarta Sans, served locally with their licenses so builds do not fetch fonts.
+The refined desktop and mobile screens were retrieved with `mcp__stitch__get_screen`, and their HTML exports were downloaded and reviewed. The first MVP followed the header → progress → task cards layout, with dark panels, crimson and gold accents, both portraits, and a visible background. Space Grotesk and Plus Jakarta Sans replaced the earlier Barlow Condensed and Inter suggestion. Both fonts and their licenses are stored locally, so builds do not need to download them.
 
-The supplied images are used exactly: images (2).jpg → background, images (3).jpg → Asta portrait, images (4).jpg → Lucifero portrait. Copied JPG file hashes match the originals. The background uses a 55% dark overlay plus a subtle vertical gradient; opaque text panels protect readability. No replacement AI artwork is used.
+At this stage, the app used the supplied JPGs directly: images (2).jpg for the background, images (3).jpg for Asta, and images (4).jpg for Lucifero. Their file hashes matched the originals. A 55% dark overlay, a subtle vertical gradient, and solid text panels kept the page readable. The later background restoration is explained below.
 
-The implementation retains the reviewed 1040px content width, 12px panel radius, 16px task descriptions, 14px badges/statuses, and 44px activation targets. It uses the reviewed crimson #F05264 and gold #D8B46A. Task section headings and saving text also have dark surfaces so they remain readable over the artwork. A brief goal/threat introduction and visible preparation-plan explanation satisfy the final acceptance checklist. No decorative action buttons were introduced.
+The first MVP kept the reviewed 1040px content width, 12px panel corners, 16px descriptions, 14px badges and status text, and 44px checkbox targets. It used crimson #F05264 and gold #D8B46A. Dark backgrounds behind the task heading and saving message made them readable over the artwork. A short introduction explained the goal and Lucifero’s role, while the progress summary explained what the percentage meant. There were no decorative action buttons.
 
-The original POC is preserved in Git history. Static page/header and local assets remain outside the small stateful Client Component. Refresh now preserves completion as requested; earlier reset-footer examples are historical.
+The original POC remains in Git history. The page, header, and local assets stay outside the small Client Component that handles task state. Refresh now keeps saved completion, so earlier reset messages no longer describe the app.
 
-Production screenshots: desktop (historical evidence retained in Git history), 360px (historical evidence retained in Git history), 320px (historical evidence retained in Git history), and focus (historical evidence retained in Git history). Layouts were visually inspected; measured contrast and functional results are in [REVIEW.md](REVIEW.md). Actual screen-reader speech and other browsers remain unverified.
+Desktop, 360px, 320px, and keyboard-focus screenshots from production remain in Git history. The layouts were visually reviewed. Test results and the earlier detailed review are linked from [REVIEW.md](REVIEW.md). Spoken screen-reader output and other browsers still need checking.
 
 ## Character context and background restoration (16 October 2026)
 
-The user requested a visible Lucifero side card like Screenshot (32), plus Asta’s second supplied portrait and short character descriptions. This explicitly expands the earlier minimal layout with supporting character context. There are still exactly three training tasks and three core training features; no combat metrics, simulation, routes, accounts, editing, or database were added.
+The owner later asked for a Lucifero card like Screenshot (32), Asta’s second supplied portrait, and short descriptions. These cards added character context while keeping the same three training tasks and main features.
 
-Desktop now uses a 288px left character column and the preparation plan on the right. On mobile the character cards follow the training controls. Each original portrait has a visible description and a native keyboard-operable disclosure for additional context. These are real controls with visible focus, not decorative buttons. The existing stateful Client Component and localStorage task logic are unchanged.
+The current desktop layout has a 288px character column on the left and the training plan on the right. On mobile, the character cards come after the tasks. Each portrait has a description and a note that users can open or close with the keyboard. The controls have visible focus. Task state and browser-saving logic were left as they were.
 
-The original background was 596 × 335 and looked soft when enlarged. A non-destructive AI-assisted restoration produced a 1672 × 941 version at `public/images/black-bulls-background-restored.png`. It is served directly without additional optimizer recompression or a CSS blur filter. The original `black-bulls-background.jpg` is preserved. Restoration improves the appearance but can reconstruct or alter small line details; it is not a higher-resolution original from the artist. Both portrait files remain the supplied originals.
+The original 596 × 335 background looked soft when enlarged. An AI-assisted restoration created a 1672 × 941 copy at `public/images/black-bulls-background-restored.png`. It is served directly, without extra image recompression or CSS blur. The original `black-bulls-background.jpg` is still kept. The restored copy can look clearer, but AI may change small details; it is not a larger original from the artist. Both portraits still use the supplied files.
 
-Evidence: [new reference](evidence/character-sidebar-reference.png), [desktop](evidence/characters-desktop.png), [mobile](evidence/characters-mobile.png), and production checks (historical evidence retained in Git history).
+See the [character-card reference](evidence/character-sidebar-reference.png), [desktop screenshot](evidence/characters-desktop.png), and [mobile screenshot](evidence/characters-mobile.png). The production check results are also preserved in Git history.
