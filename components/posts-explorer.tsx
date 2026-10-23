@@ -3,33 +3,38 @@
 import { useRef, useState } from "react";
 import { errorMessage, getPosts, type Post } from "@/lib/api";
 
+// Each state holds only the data it needs.
+type ExplorerState =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; posts: Post[] }
+  | { status: "empty" }
+  | { status: "error"; message: string };
+
 // State and click handlers need a Client Component.
 export default function PostsExplorer() {
-  // null means the button hasn't loaded anything yet.
-  const [posts, setPosts] = useState<Post[] | null>(null);
-  // These states control feedback for the button request.
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  // Start idle. Rendering this component never starts a request.
+  const [state, setState] = useState<ExplorerState>({ status: "idle" });
   // A ref blocks rapid repeat clicks before React updates the button.
   const inFlight = useRef(false);
+  const loading = state.status === "loading";
 
   // Nothing is fetched until this handler runs in the browser.
   // Click requests use loading state; Suspense doesn't watch event handlers.
   async function loadPosts() {
     if (inFlight.current) return;
-    // Mark this request as active and clear any old error.
+    // Lock immediately, then show the loading state.
     inFlight.current = true;
-    setLoading(true);
-    setError(null);
+    setState({ status: "loading" });
     try {
-      // Wait for this browser request, then store the returned posts.
-      setPosts(await getPosts());
+      // The direct API request starts here, in the browser after a click.
+      const posts = await getPosts();
+      setState(posts.length > 0 ? { status: "success", posts } : { status: "empty" });
     } catch (error) {
-      // Keep any earlier posts visible if a refresh fails.
-      setError(errorMessage(error, "posts"));
+      // Handle failure here so the server sections stay untouched.
+      setState({ status: "error", message: errorMessage(error, "posts") });
     } finally {
       // Unlock the button whether the request succeeds or fails.
-      setLoading(false);
       inFlight.current = false;
     }
   }
@@ -42,20 +47,23 @@ export default function PostsExplorer() {
           <h2 id="explore-heading">Explore all posts</h2>
           <p className="section-note">Read all our English notes on the Vinland Saga anime.</p>
         </div>
-        <button onClick={loadPosts} disabled={loading} aria-controls="all-posts">
-          {loading ? "Loading posts…" : error ? "Try again" : posts ? "Refresh posts" : "Load all posts"}
+        <button type="button" onClick={loadPosts} disabled={loading} aria-controls="all-posts">
+          {loading ? "Loading posts…" : state.status === "error" ? "Try again" : "Load posts"}
           <span aria-hidden="true"> ↗</span>
         </button>
       </div>
       <div id="all-posts" aria-busy={loading}>
         <p role="status" className="explorer-status">
-          {loading ? "Getting the posts…" : posts ? `${posts.length} posts loaded.` : "Posts will appear here after you click."}
+          {state.status === "idle" && "Click Load posts to read the full notes."}
+          {loading && "Loading posts. Please wait…"}
+          {state.status === "success" && `${state.posts.length} posts loaded.`}
+          {state.status === "empty" && "No posts found"}
+          {state.status === "error" && "Posts could not be loaded. You can try again."}
         </p>
-        {error && <p role="alert" className="error">{error}</p>}
-        {posts?.length === 0 && <p className="empty">No posts yet.</p>}
-        {posts && posts.length > 0 && (
+        {state.status === "error" && <p role="alert" className="error">{state.message}</p>}
+        {state.status === "success" && (
           <ol className="full-posts">
-            {posts.map((post, index) => (
+            {state.posts.map((post, index) => (
               <li key={post.id}>
                 <article>
                   <span className="post-number">POST {String(index + 1).padStart(2, "0")}</span>

@@ -42,6 +42,6 @@ See [TESTING.md](docs/TESTING.md) for the preview and failure checks.
 
 - The profile loads on the server in its own Suspense boundary.
 - The server preview shows up to three titles. Its two-second delay is an intentional learning simulation kept in the demo.
-- **Load all posts** fetches full posts in the browser after a click.
+- **Load posts** fetches full posts in the browser after a click.
 
 Reload the page directly to see the preview’s loading message. Navigation and prefetching can change what you observe.
