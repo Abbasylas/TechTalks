@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vinland Saga Fan Journal
 
-## Getting Started
+A small Next.js dashboard with English fan notes about Vinland Saga. It uses Next.js 16.3.6, React 19.2.8, and TypeScript.
 
-First, run the development server:
+The demo profile and post records come from JSONPlaceholder for employee 1. Original English fan notes replace the API’s placeholder post text.
+
+## Run locally
+
+Install dependencies and start the app:
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [localhost:3000](http://localhost:3000). The dashboard is at `/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+If Turbopack cannot start its compiler processes on your machine, build with Webpack instead:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build -- --webpack
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Checks
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run lint
+npx tsc --noEmit
+```
 
-## Deploy on Vercel
+See [TESTING.md](docs/TESTING.md) for the preview and failure checks.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## What to expect
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The profile loads on the server in its own Suspense boundary.
+- The server preview shows up to three titles. Its two-second delay is an intentional learning simulation kept in the demo.
+- **Load all posts** fetches full posts in the browser after a click.
+
+Reload the page directly to see the preview’s loading message. Navigation and prefetching can change what you observe.

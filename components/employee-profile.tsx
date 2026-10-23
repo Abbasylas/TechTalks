@@ -2,6 +2,7 @@ import { ApiError, EMPLOYEE_ID, type Employee } from "@/lib/api";
 
 // No "use client" here: the employee request stays on the server.
 export default async function EmployeeProfile() {
+  // Keep the parsed data typed before using its fields.
   let employee: Employee;
   try {
     // This request runs on the server, when the profile renders.
@@ -15,12 +16,13 @@ export default async function EmployeeProfile() {
       throw new ApiError("The employee profile request failed.", response.status);
     }
 
+    // Parse the response body; a parsing failure also reaches the catch below.
     employee = (await response.json()) as Employee;
   } catch {
     // Only this section changes if the profile can't load.
     return (
       <p role="alert" className="error">
-        We couldn’t load the employee profile. Please refresh the page to try again.
+        We couldn’t load the contributor profile. Please refresh the page to try again.
       </p>
     );
   }
@@ -29,7 +31,7 @@ export default async function EmployeeProfile() {
     <div className="profile-content">
       <div className="avatar" aria-hidden="true">{initials}</div>
       <h3>{employee.name}</h3>
-      <p className="employee-label">Employee 01</p>
+      <p className="employee-label">Demo contributor 01</p>
       <dl>
         <div><dt>Email</dt><dd><a href={`mailto:${employee.email}`}>{employee.email}</a></dd></div>
         <div><dt>Company</dt><dd>{employee.company.name}</dd></div>

@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Employee dashboard | TechTalks",
-  description: "An employee profile, recent posts, and more to explore.",
+  title: "Vinland Saga | The Fan Journal",
+  description: "English fan notes on Vinland Saga, Thorfinn, and the journey toward peace.",
 };
 
 // The shared layout sets the language and styles for the dashboard.
