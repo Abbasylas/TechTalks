@@ -3,16 +3,23 @@ import { vinlandNote } from "./vinland-posts";
 // The profile and both post views always use the same employee.
 export const EMPLOYEE_ID = 1;
 const API_URL = "https://jsonplaceholder.typicode.com";
+// Build the posts URL once so both views ask for employee 1.
 export const POSTS_URL = `${API_URL}/posts?userId=${EMPLOYEE_ID}`;
 
 // These types describe the API data; they don't validate it at runtime.
 export type Employee = {
-  id: number;
-  name: string;
-  email: string;
-  company: { name: string };
+  id: number; // The API calls this a user ID.
+  name: string; // The employee's full name.
+  email: string; // Used for the email link.
+  company: { name: string }; // The company name is inside a nested object.
 };
-export type Post = { userId: number; id: number; title: string; body: string };
+// A post has its own ID and the ID of the employee it belongs to.
+export type Post = {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+};
 
 // Keep the HTTP status so callers can tell a failed response from a network error.
 export class ApiError extends Error {
@@ -21,9 +28,9 @@ export class ApiError extends Error {
 
   // Start with a normal Error, then add the HTTP status.
   constructor(message: string, status: number) {
-    super(message);
-    this.name = "ApiError";
-    this.status = status;
+    super(message); // Let Error store the message and create the stack trace.
+    this.name = "ApiError"; // Give this error a useful name in the console.
+    this.status = status; // Keep the HTTP code, such as 503.
   }
 }
 
@@ -35,6 +42,7 @@ async function fetchJson<T>(url: string): Promise<T> {
     // Don't leave a loading message on screen forever.
     signal: AbortSignal.timeout(15000),
   });
+  // Hand the response to the same checker used by the demo scenarios.
   return parseJsonResponse<T>(response);
 }
 
@@ -43,6 +51,7 @@ export async function parseJsonResponse<T>(response: Response): Promise<T> {
   // fetch doesn't throw for HTTP errors such as 404 or 500.
   if (!response.ok) throw new ApiError("The request failed.", response.status);
   // Read the JSON body. Invalid JSON rejects and reaches the caller's catch.
+  // The type says what we expect; it doesn't check the JSON's shape.
   return response.json() as Promise<T>;
 }
 
@@ -57,6 +66,7 @@ export async function getPosts() {
 // A caught value can be anything, so check its type before reading its status.
 export function errorMessage(error: unknown, subject: string) {
   if (error instanceof ApiError) {
+    // We received a response, but its HTTP status wasn't successful.
     return `Could not load ${subject} (HTTP ${error.status}). Please try again.`;
   }
   // A rejected fetch can have no Response and no HTTP status.

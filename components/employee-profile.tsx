@@ -8,6 +8,7 @@ export default async function EmployeeProfile() {
     // This request runs on the server, when the profile renders.
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/users/${EMPLOYEE_ID}`,
+      // Ask for fresh data and stop waiting after 15 seconds.
       { cache: "no-store", signal: AbortSignal.timeout(15000) },
     );
 
@@ -30,6 +31,7 @@ export default async function EmployeeProfile() {
       </p>
     );
   }
+  // Take the first letter of the first two names for the profile circle.
   const initials = employee.name.split(" ").map((part) => part[0]).slice(0, 2).join("");
   return (
     <div className="profile-content">

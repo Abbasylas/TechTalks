@@ -1,5 +1,6 @@
 import { getPosts, parseJsonResponse, type Post } from "./api";
 
+// Only these four choices are allowed in the demo selector.
 export type DemoScenario = "success" | "slow" | "http-error" | "empty";
 
 // Only the client click handler uses this helper. Server sections call getPosts directly.
@@ -13,12 +14,14 @@ export async function getDemoPosts(scenario: DemoScenario): Promise<Post[]> {
     // A local success response still goes through the real JSON parser.
     return parseJsonResponse<Post[]>(new Response("[]", {
       status: 200,
+      // Tell the parser that this local response contains JSON.
       headers: { "Content-Type": "application/json" },
     }));
   }
 
   if (scenario === "slow") {
     // Intentional learning simulation: pause, then make the real API request.
+    // resolve finishes the wait after 2,000 milliseconds.
     await new Promise<void>((resolve) => setTimeout(resolve, 2000));
   }
 

@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type ChangeEvent } from "react";
 import { errorMessage, type Post } from "@/lib/api";
 import { getDemoPosts, type DemoScenario } from "@/lib/demo-scenarios";
 
+// Record makes sure every scenario has a label.
 const scenarioLabels: Record<DemoScenario, string> = {
   success: "Success — real API request",
   slow: "Slow — two-second delay, then real API request",
@@ -11,13 +12,13 @@ const scenarioLabels: Record<DemoScenario, string> = {
   empty: "Empty — local empty-array simulation",
 };
 
-// Each state holds only the data it needs.
+// The explorer can be in one of these five states at a time.
 type ExplorerState =
-  | { status: "idle" }
-  | { status: "loading" }
-  | { status: "success"; posts: Post[] }
-  | { status: "empty" }
-  | { status: "error"; message: string };
+  | { status: "idle" } // Nothing has been requested yet.
+  | { status: "loading" } // A request is still running.
+  | { status: "success"; posts: Post[] } // A successful request with posts.
+  | { status: "empty" } // A successful request with no posts.
+  | { status: "error"; message: string }; // A failed request with a safe message.
 
 // State and click handlers need a Client Component.
 export default function PostsExplorer() {
@@ -29,21 +30,30 @@ export default function PostsExplorer() {
   const [lastScenario, setLastScenario] = useState<DemoScenario | null>(null);
   // A ref blocks rapid repeat clicks before React updates the button.
   const inFlight = useRef(false);
+  // Use the state to decide whether the controls should be disabled.
   const loading = state.status === "loading";
+
+  // Save the next choice. Changing it doesn't run a request.
+  function changeScenario(event: ChangeEvent<HTMLSelectElement>) {
+    // The select options use the four DemoScenario values above.
+    setScenario(event.currentTarget.value as DemoScenario);
+  }
 
   // Nothing is fetched until this handler runs in the browser.
   // Click requests use loading state; Suspense doesn't watch event handlers.
   async function loadPosts() {
-    if (inFlight.current) return;
+    if (inFlight.current) return; // Ignore another click while we're waiting.
     // Lock immediately, then show the loading state.
     inFlight.current = true;
     // Capture this choice for this attempt only.
     const selectedScenario = scenario;
+    // Keep the last-attempt label tied to this request.
     setLastScenario(selectedScenario);
     setState({ status: "loading" });
     try {
       // Real and simulated responses go through the same response checks.
       const posts = await getDemoPosts(selectedScenario);
+      // An empty array is still a successful response, so give it its own state.
       setState(posts.length > 0 ? { status: "success", posts } : { status: "empty" });
     } catch (error) {
       // errorMessage checks for ApiError before handling network or other failures.
@@ -73,7 +83,7 @@ export default function PostsExplorer() {
           Demo scenario
           <select id="demo-scenario" value={scenario} disabled={loading}
             aria-describedby="demo-help"
-            onChange={(event) => setScenario(event.currentTarget.value as DemoScenario)}>
+            onChange={changeScenario}>
             {Object.entries(scenarioLabels).map(([value, label]) => (
               <option key={value} value={value}>{label}</option>
             ))}

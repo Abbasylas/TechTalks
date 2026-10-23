@@ -10,6 +10,7 @@ export default async function RecentPosts() {
   await connection();
 
   // Only this preview pauses. The page shell and profile can render separately.
+  // The promise finishes when the timer calls resolve after two seconds.
   await new Promise<void>((resolve) => setTimeout(resolve, PREVIEW_DELAY_MS));
 
   // Post[] describes the records returned for employee 1.

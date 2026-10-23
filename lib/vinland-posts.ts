@@ -44,6 +44,8 @@ const notes = [
 
 // Keep the API record ID, but give its placeholder text an English display version.
 export function vinlandNote(id: number) {
+  // API IDs start at 1, but array positions start at 0.
+  // If there's no matching note, use the short fallback below.
   return notes[id - 1] ?? {
     title: "Another step toward Vinland",
     body: "A fan note on the choices, friendships, and hopes that shape Thorfinn’s journey.",
