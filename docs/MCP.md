@@ -4,8 +4,8 @@
 
 - **Purpose:** Retrieve the reviewed dashboard design from Google Stitch for implementation.
 - **Successful call:** `mcp__stitch__get_screen` returned **Asta’s Preparation Dashboard - Refined Desktop**, device type **DESKTOP**, size **2560 × 2048**, and HTML/screenshot links.
-- **Evidence:** The [new successful-call record](evidence/stitch-successful-call.json) preserves the actual request and returned metadata. Existing screenshots and historical commit links remain below.
-- **Status:** The read-only call succeeded in this session. A screenshot of its expanded native call UI is not included; the existing image shows a saved record.
+- **Evidence:** [Native call result](evidence/stitch-native-call.png), [HTML result continuation](evidence/stitch-native-call-html.png), and the [saved request/result](evidence/stitch-successful-call.json).
+- **Status:** The read-only call succeeded; screenshots of its expanded native tool result are now included.
 
 ## Successful call in this session
 
@@ -64,11 +64,12 @@ The original Stitch tool metadata was inspected before calling the server. It ex
   - [Heading fonts and colour tokens](https://github.com/Abbasylas/TechTalks/blob/4d58a918fe1ddf46fedefc9e0ffae382bf318eb4/docs/evidence/stitch-mcp-record-colour-tokens.png), source Screenshot (31).png: shows saved heading/label fonts and named colours.
 - These images document the saved results, not a live tool execution or native MCP call UI. VS Code is the viewer in these screenshots; it was not the host that made the recorded calls.
 
-## Screenshot still required
+## Native call screenshots
 
-The historical JSON and screenshot match: both show `mcp__stitch__list_projects`, input `{}`, five returned projects, and the matched Asta project. The image shows the saved record in VS Code. The new successful call is recorded above; an expanded native call UI screenshot has not been captured.
+- [Native call result](evidence/stitch-native-call.png), supplied as Screenshot (34).png: shows the expanded “Get screen” tool in the native chat UI, with the returned screen identifier, refined desktop title, and screenshot asset link.
+- [HTML result continuation](evidence/stitch-native-call-html.png), supplied as Screenshot (35).png: shows the same expanded result scrolled to the HTML file identifier and download link.
 
-To complete the screenshot evidence, capture the successful call above with its tool name, request, and returned result expanded, with credentials hidden. Save it in `docs/evidence/` and link it here.
+Both screenshots are preserved unchanged. They capture portions of the successful response; the request and complete metadata, including dimensions, are in the [saved call record](evidence/stitch-successful-call.json). The older VS Code screenshots above remain historical evidence of saved records.
 
 ## MVP design-context retrieval (16 October 2026)
 

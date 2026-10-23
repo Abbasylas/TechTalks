@@ -2,7 +2,7 @@
 
 **Author: Abbas Al Shab**
 
-**Current status:** The MVP supports three training tasks, completion and undo, calculated progress, and localStorage saving. Muhammad’s user test is recorded in the review. A live Stitch MCP call screenshot remains outstanding; existing evidence is preserved.
+**Current status:** The MVP supports three training tasks, completion and undo, calculated progress, and localStorage saving. Muhammad’s user test is recorded in the review. [Native Stitch call screenshots](docs/MCP.md#native-call-screenshots) and the saved request/result are included.
 
 A single-screen training dashboard built with Next.js, TypeScript and Tailwind. It follows the reviewed Stitch design, uses the three supplied images, and tracks completion of a fixed preparation plan with browser-local saving.
 
@@ -33,7 +33,7 @@ npm run lint
 | Document | Contents |
 | --- | --- |
 | [REVIEW.md](docs/REVIEW.md) | Muhammad’s user test, acceptance results, and verification limits. |
-| [MCP.md](docs/MCP.md) | Recorded Stitch calls, evidence, commit links, and screenshot limitation. |
+| [MCP.md](docs/MCP.md) | Recorded Stitch calls, native call screenshots, and commit links. |
 | [Reflection](docs/QUESTIONS.md) | Abbas Al Shab’s assignment reflection. |
 | [PRD](docs/PRD.md) | Current requirements and acceptance criteria. |
 | [Design](docs/DESIGN.md) | Current design summary and labelled historical recommendations. |

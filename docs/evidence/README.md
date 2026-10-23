@@ -1,9 +1,11 @@
 # Selected evidence
 
-**Current status:** Six historical screenshots and a new successful Google Stitch call record are preserved. The MCP image shows a saved record; an expanded native call screenshot is still outstanding. Test results are recorded in [REVIEW.md](../REVIEW.md#final-assignment-verification).
+**Current status:** Two native Google Stitch call screenshots, the saved successful request/result, and six historical screenshots are preserved. Test results are recorded in [REVIEW.md](../REVIEW.md#final-assignment-verification).
 
 | File | Purpose |
 | --- | --- |
+| [stitch-native-call.png](stitch-native-call.png) | Native “Get screen” result showing the screen identifier, title, and screenshot asset link; supplied Screenshot (34).png. |
+| [stitch-native-call-html.png](stitch-native-call-html.png) | Continuation of the same native result showing the HTML file identifier and download link; supplied Screenshot (35).png. |
 | [stitch-successful-call.json](stitch-successful-call.json) | Actual request and returned metadata from the successful `get_screen` call in this session; asset download URLs omitted. |
 | [characters-desktop.png](characters-desktop.png) | Production desktop dashboard from the character-sidebar implementation. |
 | [characters-mobile.png](characters-mobile.png) | Production mobile dashboard from the character-sidebar implementation. |
