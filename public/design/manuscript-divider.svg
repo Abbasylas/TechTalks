@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 72" fill="none">
+ <path d="M0 36H545M655 36H1200" stroke="#aa8a60" stroke-width="1.2" opacity=".75"/>
+ <path d="M548 36 578 16 600 36 622 16 652 36 622 56 600 36 578 56Z" stroke="#aa8a60" stroke-width="2" fill="#2c2522"/>
+ <path d="M600 12v48M566 36h68M585 21l30 30M615 21l-30 30" stroke="#8e302b" stroke-width="2"/>
+ <circle cx="600" cy="36" r="5" fill="#c4a575"/>
+</svg>
