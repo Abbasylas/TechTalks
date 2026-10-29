@@ -1,15 +1,16 @@
-API screenshot evidence
+My screenshots
 Abbas Al Shab
 
-41-post-created-thunder-client.png: POST creates a demo order and returns 201 with a generated ID.
-42-get-existing-thunder-client.png: GET returns 200 and the requested order.
-43-invalid-url-thunder-client.png: Thunder Client reports an invalid URL. This is a request setup error, not an API 400 or 404.
-44-post-created-postman.png: POST returns 201 with demo order data. Total and status are not visible.
-45-get-orders-postman.png: GET orders returns 200. Part of the response is hidden.
-46-get-existing-postman.png: GET returns 200 with the matching order ID. Lower fields are clipped.
-47-patch-quantity-postman.png: PATCH changes quantity to 4 and returns 200, total 32, and Pending.
-48-patch-delivered-postman.png: PATCH changes status to Delivered and returns 200, keeping total 32.
-49-patch-protected-id-postman.png: PATCH changes quantity to 10 but keeps the original ID instead of accepting 101.
-50-get-updated-order-postman.png: GET confirms quantity 10, unit price 8, total 80, and Delivered.
+41-post-created-thunder-client.png: Added an order and got 201 with a new ID.
+42-get-existing-thunder-client.png: Fetched that order and got 200.
+43-invalid-url-thunder-client.png: The request URL was entered incorrectly. This is not an API 400 or 404.
+44-post-created-postman.png: Added an order and got 201. Total and status are off-screen.
+45-get-orders-postman.png: Fetched the order list and got 200. Part of the response is hidden.
+46-get-existing-postman.png: Fetched one order and got 200 with the matching ID. Some fields are off-screen.
+47-patch-quantity-postman.png: Changed quantity to 4. The response is 200 with total 32 and Pending.
+48-patch-delivered-postman.png: Changed status to Delivered. Total stayed 32.
+49-patch-protected-id-postman.png: Sent id 101 and quantity 10. Quantity changed, but the original ID stayed.
+50-get-updated-order-postman.png: Fetched the saved order: quantity 10, price 8, total 80, Delivered.
+mobile-dashboard.png: Shows the dashboard on a 390 by 844 screen, with counts and an empty list.
 
-All ten images are unchanged copies of the supplied screenshots. They cover successful GET, POST, and PATCH requests. DELETE 204, API validation 400, and unknown-ID 404 screenshots are still missing from this set.
+The ten supplied screenshots are unchanged. DELETE 204, validation 400, and unknown-ID 404 screenshots are still missing.

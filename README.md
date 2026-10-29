@@ -1,54 +1,29 @@
-# Nour’s Order Desk
+Nour's Order Desk
+Abbas Al Shab
+Branch: assignment-4-nour-order-desk
 
-Author: Abbas Al Shab
+I built this small Next.js dashboard to help Nour keep her candle orders in one place. She can add an order, view it, edit it, change its status, and delete a mistake. The counts show total, pending, and delivered orders.
 
-Branch: `assignment-4-nour-order-desk`
-
-A Next.js App Router assignment for recording one product line per order. Use fictional customer names and phone values only.
-
-## Run locally
-
-```sh
+To run it
+Install Node.js, open this folder, then run:
 npm ci
 npm run dev
-```
 
-Open http://localhost:3000. The order list starts empty. Add an order, open its details, edit its fields or status, and confirm deletion. Summary counts come from the orders returned by the API.
+Open http://localhost:3000, or the address shown in the terminal.
 
-## Teaching catalogue
+The suggested prices are USD 8.00 for Vanilla Candle, USD 10.00 for Cedar Candle, and USD 6.00 for Mini Gift Candle. These are assignment prices. The price can be edited, and every order starts as Pending. Only fictional customer details should be used.
 
-| Product | Suggested unit price (USD) |
-| --- | --- |
-| Vanilla Candle | 8.00 |
-| Cedar Candle | 10.00 |
-| Mini Gift Candle | 6.00 |
+The dashboard calls the API using fetch. The server checks the data, creates IDs, and works out totals. There is no database: restarting the server loses the orders, development reloads may reset them, and separate servers do not share them reliably.
 
-These are assignment data, not real brand prices. Unit prices remain editable. Each new order starts as Pending; updates may use Pending, Preparing, or Delivered.
-
-## API and data
-
-The client dashboard uses `fetch` to call the Next.js Route Handlers. The server validates fields, generates IDs, and calculates totals. It never trusts a client-supplied ID or total. Prices stay in dollars, and totals are quantity multiplied by unit price, rounded to two decimal places.
-
-| Method | Endpoint | Success |
-| --- | --- | --- |
-| GET | `/api/orders` | 200 |
-| GET | `/api/orders/[id]` | 200 |
-| POST | `/api/orders` | 201 |
-| PATCH | `/api/orders/[id]` | 200 |
-| DELETE | `/api/orders/[id]` | 204, no response body |
-
-Invalid input and malformed JSON return 400 with an `error` message. Missing orders return 404. PATCH validates all supplied editable fields before applying changes, preserves omitted fields, and rejects empty updates.
-
-All handlers share the server-side in-memory store in `lib/orders.ts` within one running local process. Data can reset during development reloads or server restarts. Multiple server instances do not reliably share this store. Test locally; deployment does not provide persistence. There is no database, authentication, inventory, payment, or integration workflow.
-
-## Checks
-
-```sh
+Checks
 npm run lint
 npx tsc --noEmit
 npm run build
-```
 
-For manual verification, create three Vanilla Candles at USD 8.00, check the server returns total 24 and Pending, then PATCH quantity to 4 and status to Preparing and check total 32. Verify invalid updates leave the order unchanged, and deletion returns an empty 204 response. The dashboard includes initial loading, load retry, empty state, pending actions, API errors, and preservation of rejected form values.
-
-See [review answers and acceptance results](docs/REVIEW.md) and the [screenshot evidence index](docs/evidence/README.md).
+More details
+[Plan](docs/PLAN.md)
+[API](docs/API.md)
+[Test results](docs/TESTING.md)
+[Review answers](docs/REVIEW.md)
+[Evidence](docs/evidence/README.md)
+[Mobile screenshot](docs/evidence/mobile-dashboard.png)
