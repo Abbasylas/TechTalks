@@ -52,9 +52,9 @@ If that were the only boundary, the loading message could replace the whole dash
 
 ## 7. What if employee 1 changes to 2 everywhere?
 
-The requests would use `/users/2` and `/posts?userId=2`. The employee and post records would change, but the requests would still run in the same places.
+The requests would use `/users/2` and `/posts?userId=2`. The employee and post records would change, but the requests would still run in the same places. The API titles and bodies remain visible; fan notes are additional and only available for IDs 1–10.
 
-There are two details to update: the fixed “Demo contributor 01” label and the fan notes. Notes only cover post IDs 1–10, so other IDs use the generic fallback note. I have not tested employee 2.
+The profile’s “Demo contributor 01” label is fixed and should be updated if the demo employee changes. Fan notes are additional content only for post IDs 1–10; other IDs still show their returned API title and body without a fan note. I have not tested employee 2.
 
 ## 8. What did I verify instead of assuming?
 

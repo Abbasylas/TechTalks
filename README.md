@@ -4,7 +4,7 @@ Full name: Abbas Al Shab
 
 An Employee Explorer dashboard at `/`, themed around Vinland Saga. It uses Next.js 16.3.6, React 19.2.8, and TypeScript.
 
-The demo profile and post records come from JSONPlaceholder for employee 1. Original English fan notes replace the API’s placeholder post text.
+The demo profile and post records come from JSONPlaceholder for employee 1. Post titles and bodies remain the API data; original English fan notes appear separately when available.
 
 ## Run locally
 
@@ -66,7 +66,7 @@ To check recovery, select **HTTP error**, click **Load posts**, then select **Su
 ## Limitations
 
 - Real profile and posts requests need an internet connection and a working JSONPlaceholder API.
-- The English fan notes cover post IDs 1–10. Other post IDs show a generic note.
+- The optional English fan notes cover post IDs 1–10. Other post IDs display the API data without a fan note.
 - The contributor number in the profile is a fixed demo label.
 - The delays and local responses are kept for learning. They do not describe the API’s real speed or reliability.
-- Browser request counting, other browsers, and screen-reader output were not tested. The testing report explains what was checked.
+- Browser request counting, other browsers, and screen-reader output were not verified in the current environment. The testing report explains the limitation.

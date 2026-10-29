@@ -125,6 +125,8 @@ dd a:hover { color: var(--saga-oxblood); text-decoration-color: currentColor; }
 .post-number { color: #6c4c36; font-size: 11px; line-height: 1.5; letter-spacing: 1.2px; font-variant-numeric: tabular-nums; }
 .preview-list .post-number { padding-top: 4px; color: #7a302a; }
 .preview-list h3 { margin: 0; font: 700 20px/1.4 var(--display-font); overflow-wrap: anywhere; }
+.preview-list p { max-width: 65ch; margin: 8px 0 0; color: #534337; font-size: 14px; line-height: 1.65; }
+.preview-list .fan-note, .full-posts .fan-note { margin-top: 11px; padding-left: 12px; border-left: 2px solid #b79d7a; color: var(--muted); }
 
 .explorer { margin-top: 26px; padding-top: 32px; }
 .explore-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; }

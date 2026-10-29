@@ -16,7 +16,7 @@ export default async function RecentPosts() {
   // Post[] describes the records returned for employee 1.
   let posts: Post[];
   try {
-    // getPosts uses /posts?userId=1 and adds our English fan-note text.
+    // getPosts uses /posts?userId=1 and keeps fan notes separate from API data.
     posts = await getPosts();
   } catch (error) {
     // errorMessage separates HTTP errors from network failures, just for this section.
@@ -31,7 +31,11 @@ export default async function RecentPosts() {
       {preview.map((post, index) => (
         <li key={post.id}>
           <span className="post-number" aria-hidden="true">0{index + 1}</span>
-          <h3>{post.title}</h3>
+          <div>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+            {post.fanNote && <p className="fan-note"><strong>Fan note:</strong> {post.fanNote.body}</p>}
+          </div>
         </li>
       ))}
     </ol>

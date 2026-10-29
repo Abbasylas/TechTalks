@@ -71,7 +71,7 @@ export default function PostsExplorer() {
         <div>
           <p className="eyebrow">CHARACTERS, CHOICES, AND SECOND CHANCES</p>
           <h2 id="explore-heading">Explore all posts</h2>
-          <p className="section-note">Read all our English notes on the Vinland Saga anime.</p>
+          <p className="section-note">Read API posts with optional, separately labelled Vinland Saga fan notes.</p>
         </div>
         <button type="button" onClick={loadPosts} disabled={loading} aria-controls="all-posts">
           {loading ? "Loading posts…" : state.status === "error" ? "Retry" : "Load posts"}
@@ -113,6 +113,7 @@ export default function PostsExplorer() {
                   <span className="post-number">POST {String(index + 1).padStart(2, "0")}</span>
                   <h3>{post.title}</h3>
                   <p>{post.body}</p>
+                  {post.fanNote && <p className="fan-note"><strong>Fan note: {post.fanNote.title}</strong><br />{post.fanNote.body}</p>}
                 </article>
               </li>
             ))}

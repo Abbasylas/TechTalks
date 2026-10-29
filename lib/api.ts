@@ -19,6 +19,7 @@ export type Post = {
   id: number;
   title: string;
   body: string;
+  fanNote?: { title: string; body: string };
 };
 
 // Keep the HTTP status so callers can tell a failed response from a network error.
@@ -59,8 +60,8 @@ export async function parseJsonResponse<T>(response: Response): Promise<T> {
 export async function getPosts() {
   // This runs on the server for the preview and in the browser after a click.
   const posts = await fetchJson<Post[]>(POSTS_URL);
-  // The API supplies demo records; our fan notes replace its placeholder Latin.
-  return posts.map((post) => ({ ...post, ...vinlandNote(post.id) }));
+  // Preserve the API title and body. Fan notes are separate optional content.
+  return posts.map((post) => ({ ...post, fanNote: vinlandNote(post.id) }));
 }
 
 // A caught value can be anything, so check its type before reading its status.

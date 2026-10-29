@@ -22,31 +22,31 @@ The main checks passed. The profile loaded, the preview showed its loading messa
 **Client idle**
 
 - Expected: No fetch before clicking.
-- Actual: The code test counted zero requests before clicking, even after changing the selector.
-- Result: Pass in the code test. Browser request counting was not tested.
+- Actual: The code test counted zero requests before clicking, even after changing the selector. I could not reach the local dev server in the browser for a new Network-panel check in this environment.
+- Result: Pass in the code test; browser Network check remains unverified.
 
 **Client slow**
 
 - Expected: Loading feedback and no duplicate requests.
-- Actual: The controls were disabled, then 10 posts appeared. Two rapid clicks made one request in the code test.
+- Actual: The controls were disabled, then 10 API posts appeared. Two rapid clicks made one request in the code test. The browser Network-panel request count was not verified.
 - Result: Pass.
 
 **Client success**
 
 - Expected: Post titles and bodies.
-- Actual: Saw 10 English fan notes after the real API request.
+- Actual: Saw the returned API title and body for each post, followed by separately labelled fan-note content where available. The browser Network-panel request count was not verified.
 - Result: Pass.
 
 **HTTP failure**
 
 - Expected: Catch the custom error and offer Retry.
-- Actual: The local 503 showed an error and Retry. The code test confirmed `ApiError` with status 503.
+- Actual: The local 503 showed an error and Retry. The code test confirmed `ApiError` with status 503. Browser Network-panel request count was not verified.
 - Result: Pass.
 
 **Empty response**
 
 - Expected: “No posts found” without an error.
-- Actual: Saw that message after the local empty response. No error appeared.
+- Actual: Saw that message after the local empty response. No error appeared. Browser Network-panel request count was not verified.
 - Result: Pass.
 
 **Recovery**
@@ -67,7 +67,7 @@ The main checks passed. The profile loaded, the preview showed its loading messa
 - Actual: Labels and focus were visible. Text wrapped without sideways scrolling.
 - Result: Pass.
 
-Request counts used a fake fetch in a code test. The visible states were checked in the running browser. The English fan notes replace the API’s placeholder Latin.
+The fake-fetch code test checks request counts and handler behavior in isolation. Browser Network-panel counts still need to be checked manually: expect one client request for each Success or Slow attempt, and none for the local HTTP error or Empty scenarios. The rendered API title/body remain visible; fan notes are additional labelled content.
 
 ## Commands
 
@@ -121,7 +121,7 @@ At 360px, Shift+Tab focused Load posts. Tab then moved to Demo scenario. Both ha
 
 ## Not tested
 
-- Counting requests in the browser’s Network panel.
+- Counting requests in the browser’s Network panel. The local dev server could not be reached from the available browser/shell in this environment.
 - A real API outage or a real 503 from JSONPlaceholder.
 - Screen-reader output and other browsers.
 
