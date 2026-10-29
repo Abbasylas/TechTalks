@@ -67,7 +67,11 @@ The main checks passed. The profile loaded, the preview showed its loading messa
 - Actual: Labels and focus were visible. Text wrapped without sideways scrolling.
 - Result: Pass.
 
-The fake-fetch code test checks request counts and handler behavior in isolation. Browser Network-panel counts still need to be checked manually: expect one client request for each Success or Slow attempt, and none for the local HTTP error or Empty scenarios. The rendered API title/body remain visible; fan notes are additional labelled content.
+The fake-fetch code test checks request counts and handler behavior in isolation. The browser Network panel separately confirmed the client request counts below. The rendered API title/body remain visible; fan notes are additional labelled content.
+
+## Browser Network check
+
+Chrome Network-panel screenshots confirm no client API request before clicking, one `posts?userId=1` request for Success and Slow, and no request for the local Empty or HTTP error simulations. See `docs/screenshots/network-*.png`.
 
 ## Commands
 
@@ -121,7 +125,6 @@ At 360px, Shift+Tab focused Load posts. Tab then moved to Demo scenario. Both ha
 
 ## Not tested
 
-- Counting requests in the browser’s Network panel. The local dev server could not be reached from the available browser/shell in this environment.
 - A real API outage or a real 503 from JSONPlaceholder.
 - Screen-reader output and other browsers.
 
