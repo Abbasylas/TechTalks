@@ -1,69 +1,8 @@
-import Image from "next/image";
-
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
-}
+"use client";
+import {useEffect,useState} from "react";
+type O={id:string;customer:string;phone:string;product:string;quantity:number;unitPrice:number;status:string;notes:string};
+const catalog={"Vanilla Candle":8,"Cedar Candle":10,"Mini Gift Candle":6};
+export default function Home(){const [orders,setOrders]=useState<O[]>([]),[active,setActive]=useState<O|null>(null),[edit,setEdit]=useState(false),[error,setError]=useState("");const [f,F]=useState({customer:"",phone:"",product:"Vanilla Candle",quantity:1,unitPrice:8,status:"Pending",notes:""});// Reload the orders after a successful API change.
+async function load(){setOrders(await(await fetch("/api/orders")).json())}useEffect(()=>{let current=true;fetch("/api/orders").then(r=>r.json()).then(data=>{if(current)setOrders(data)}).catch(()=>{if(current)setError("Unable to load orders.")});return()=>{current=false}},[]);// Submit the form to the API and show its saved order response.
+async function save(e:React.FormEvent){e.preventDefault();const r=await fetch(active?"/api/orders/"+active.id:"/api/orders",{method:active?"PATCH":"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(f)}),d=await r.json();if(!r.ok){setError(d.error);return}await load();setActive(d);setEdit(false)}// Confirm the deletion before asking the API to remove the order.
+async function remove(){if(active&&confirm("Delete this order?")){await fetch("/api/orders/"+active.id,{method:"DELETE"});setActive(null);load()}}const counts=[orders.length,orders.filter(o=>o.status==="Pending").length,orders.filter(o=>o.status==="Delivered").length];return <main><aside><b className="logo">n.</b><h3>Nour’s desk</h3><p>WORKSPACE</p><button>▦　Orders　{counts[0]}</button></aside><section><header>Workspace / Orders</header><div className="wrap"><div className="title"><div><small>YOUR BUSINESS, IN ONE PLACE</small><h1>Orders</h1><p>Keep every candle order moving, from request to delivery.</p></div><button onClick={()=>{setActive(null);F({customer:"",phone:"",product:"Vanilla Candle",quantity:1,unitPrice:8,status:"Pending",notes:""});setEdit(true)}}>＋ New order</button></div><div className="stats">{["Total orders","Pending","Delivered"].map((x,i)=><div key={x}><small>{x}</small><b>{counts[i]}</b></div>)}</div><h2>All orders <small>{orders.length}</small></h2><p>Manage and track customer requests</p>{error&&<p>{error}</p>}<table><thead><tr><th>CUSTOMER</th><th>PRODUCT</th><th>QTY</th><th>TOTAL</th><th>STATUS</th></tr></thead><tbody>{orders.map(o=><tr key={o.id} onClick={()=>{setActive(o);setEdit(false)}}><td>{o.customer}<small>{o.phone}</small></td><td>{o.product}</td><td>{o.quantity}</td><td>${(o.quantity*o.unitPrice).toFixed(2)}</td><td>{o.status}</td></tr>)}</tbody></table>{!orders.length&&<div className="empty"><h3>No orders yet</h3><p>Orders you add will appear here.</p></div>}</div></section>{(active||edit)&&<div className="shade"><div className="panel"><button className="x" onClick={()=>{setEdit(false);setActive(null)}}>×</button>{edit?<><h2>{active?"Edit order":"Add an order"}</h2><form onSubmit={save}><label>Customer name<input required value={f.customer} onChange={e=>F({...f,customer:e.target.value})}/></label><label>Phone number<input required value={f.phone} onChange={e=>F({...f,phone:e.target.value})}/></label><label>Product<select value={f.product} onChange={e=>F({...f,product:e.target.value,unitPrice:catalog[e.target.value as keyof typeof catalog]})}>{Object.keys(catalog).map(p=><option key={p}>{p}</option>)}</select></label><label>Quantity<input type="number" min="1" value={f.quantity} onChange={e=>F({...f,quantity:+e.target.value})}/></label><label>Unit price (USD)<input type="number" min="0" step=".01" value={f.unitPrice} onChange={e=>F({...f,unitPrice:+e.target.value})}/></label>{active&&<label>Status<select value={f.status} onChange={e=>F({...f,status:e.target.value})}><option>Pending</option><option>Preparing</option><option>Delivered</option></select></label>}<label>Notes<textarea value={f.notes} onChange={e=>F({...f,notes:e.target.value})}/></label><button>Save order</button></form></>:<><h2>{active?.customer}</h2><p>{active?.phone}</p><label>Status<select value={active?.status} onChange={async e=>{const r=await fetch("/api/orders/"+active?.id,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({status:e.target.value})});const d=await r.json();setActive(d);load()}}><option>Pending</option><option>Preparing</option><option>Delivered</option></select></label><h3>{active?.product}</h3><p>Quantity {active?.quantity} · Total ${((active?.quantity||0)*(active?.unitPrice||0)).toFixed(2)} USD</p><p>{active?.notes}</p><button onClick={()=>{F({...active!,status:active!.status});setEdit(true)}}>Edit order</button><button onClick={remove}>Delete</button></>}</div></div>}</main>}
