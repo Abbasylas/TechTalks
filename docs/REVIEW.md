@@ -23,8 +23,10 @@ The seven acceptance steps also passed automated local checks on 29 October 2026
 
 Screenshots 56 and 57 now show DELETE returning 204 with no body and GET returning 404 for that deleted order.
 
-The new browser screenshots show blocked loading, a successful load after unblocking, and an edit form keeping its entered values with Order not found after the order was deleted. They do not show a retry click or the failed save status. The screenshots are now grouped in docs/evidence/api, docs/evidence/browser, and docs/evidence/mobile.
+The browser screenshots show blocked loading, recovery after unblocking, and an edit form keeping its entered values with Order not found after the order was deleted. The failed save status is not selected in screenshot 63. The screenshots are grouped in docs/evidence/api, docs/evidence/browser, and docs/evidence/mobile.
 
 Screenshots 64 and 65 show the faded Deleting... and Saving... buttons while requests are pending under 3G.
 
 Screenshots 66 and 67 show two pending orders on the mobile dashboard and the filled Add an order form at 380 by 844.
+
+Screenshots 74 to 76 show the load error and Try again button, another blocked request, and then a successful 200 request with three pending orders. The page-load markers stay the same during this retry sequence.

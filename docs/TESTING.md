@@ -29,8 +29,9 @@ Screenshots 66 and 67 show the mobile dashboard with two pending orders and the 
 
 Screenshots 68 and 69 show the new Demo Validation order and its saved values. Screenshots 71 and 72 show PATCH with customerName Should Not Save and quantity -2 returning 400. Screenshot 72 shows the useful quantity error. Screenshot 73 fetches the same ID afterward and shows the original name, quantity 3, total 24, and Pending. Neither requested change was saved. Duplicate copies of screenshots 69 and 73 were skipped.
 
-Still missing
-A visible retry button and evidence that clicking it recovered the page, rather than reloading.
+Screenshots 74 to 76 record the retry sequence. The error message and Try again button are fully visible. The log grows from two blocked requests to three, then adds a 200 orders request after unblocking. The dashboard shows three pending orders afterward. The page-load markers remain unchanged, supporting recovery on the same page load.
+
+Not checked or optional
 A restart test, a multi-server test, and a full accessibility check.
 There is no recording or deployed demo.
 

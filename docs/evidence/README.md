@@ -34,6 +34,9 @@ browser/59-load-recovered.png: Removed the blocking rule. The requests returned 
 browser/63-rejected-edit-values-kept.png: The edit form stays open with the entered values and Order not found. Screenshot 62 shows the same order was deleted. The selected request is an earlier GET 200, so the failed save status is not visible.
 browser/64-delete-pending-3g.png: With 3G selected, the delete request is pending. The button shows Deleting... and the edit and delete actions are faded while it runs.
 browser/65-save-pending-3g.png: With 3G selected, the save request is pending. The form keeps its values and the faded button shows Saving... while it runs.
+browser/74-load-error-retry-button.png: Blocked /api/orders. The load error, Failed to fetch message, and Try again button are fully visible beside two blocked requests.
+browser/75-retry-attempt-before-recovery.png: The error and Try again button remain visible with three blocked requests in the log. The blocking rule has been removed.
+browser/76-retry-recovered-populated-orders.png: A new orders request returns 200 after the three failed requests. The page shows three orders, three Pending, and zero Delivered. The page-load markers stay the same across the sequence.
 
 Mobile layout
 
@@ -41,4 +44,4 @@ mobile/mobile-dashboard.png: Shows the dashboard on a 390 by 844 screen, with co
 mobile/66-populated-dashboard-380x844.png: Shows the mobile dashboard with two orders, two Pending, and zero Delivered. DevTools shows 380 by 844.
 mobile/67-filled-order-form-380x844.png: Shows the mobile Add an order form with entered values and the Save order button. DevTools shows 380 by 844.
 
-The thirty supplied screenshots are unchanged. Duplicate copies were skipped. The validation 400 and GET after a rejected PATCH are now included. Retry-click evidence is still missing. Screenshots 64 and 65 show pending actions under 3G. Screenshots 66 and 67 show the populated mobile dashboard and the filled form.
+The thirty-three supplied screenshots are unchanged. Duplicate copies were skipped. Validation 400, GET after a rejected PATCH, and the retry sequence are now included. Screenshots 64 and 65 show pending actions under 3G. Screenshots 66 and 67 show the populated mobile dashboard and the filled form.
