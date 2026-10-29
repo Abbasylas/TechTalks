@@ -1,6 +1,9 @@
 My plan for Nour's Order Desk
 Abbas Al Shab
 
+Repository: Abbasylas/TechTalks
+Branch: assignment-4-nour-order-desk
+
 Nour keeps orders in different notes and messages, so it is easy to lose track. The goal is one simple dashboard where she can see what needs preparing.
 
 The dashboard needs to list, view, add, edit, and delete orders. It also needs status changes, real summary counts, loading messages, useful errors, a retry button, and delete confirmation. Each order has one product and an editable USD price.

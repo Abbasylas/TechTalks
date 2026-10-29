@@ -2,15 +2,15 @@ Nour's Order Desk
 Abbas Al Shab
 Branch: assignment-4-nour-order-desk
 
-Repository choice
-The brief asked for a separate repository. I kept this assignment in the shared Abbasylas/TechTalks repository on the assignment-4-nour-order-desk branch. This is a deliberate difference from the brief. Please use this branch to review and run the assignment.
-[Assignment branch](https://github.com/Abbasylas/TechTalks/tree/assignment-4-nour-order-desk)
+Project location
+This project belongs to the assignment-4-nour-order-desk branch of Abbasylas/TechTalks. Use this branch to view, run, and update Nour's Order Desk.
+[Project branch](https://github.com/Abbasylas/TechTalks/tree/assignment-4-nour-order-desk)
 
 I built this small Next.js dashboard to help Nour keep her candle orders in one place. She can add an order, view it, edit it, change its status, and delete a mistake. The counts show total, pending, and delivered orders.
 
 To run it
 Install Node.js and Git, then run:
-git clone https://github.com/Abbasylas/TechTalks.git
+git clone --branch assignment-4-nour-order-desk --single-branch https://github.com/Abbasylas/TechTalks.git
 cd TechTalks
 git switch assignment-4-nour-order-desk
 npm ci

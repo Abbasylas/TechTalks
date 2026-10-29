@@ -6,8 +6,6 @@ Lint, TypeScript, and the Webpack production build passed. This does not confirm
 
 The automated local API run passed 41 checks. It covered valid requests, missing and blank fields, bad quantities and prices, malformed JSON, invalid status, empty updates, protected IDs and totals, and missing orders.
 
-A separate source review reported 34 passing handler assertions using native Request/Response and a small NextResponse adapter. That review did not run a full Next.js server, browser, lint, or build check. It is separate from the earlier checks above.
-
 A separate acceptance run passed these seven steps:
 1. Add 3 Vanilla Candles at USD 8: 201, total 24, Pending.
 2. Change quantity to 4: 200, total 32, customer name kept.
